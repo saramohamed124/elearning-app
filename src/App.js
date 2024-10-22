@@ -1,10 +1,19 @@
+import React, { Suspense } from 'react';
 import './App.css';
-import Login from './components/Auth/Login';
+import Loader from './utils/Loader/Loader';
+import { Route, Routes } from 'react-router-dom';
+import PageNotFound from './utils/Error/PageNotFound';
+const Home = React.lazy(() => import('./pages/Home')) ;
 
 function App() {
   return (
     <div className="App">
-      <Login/>
+      <Suspense fallback={<Loader/>}>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='*' element={<PageNotFound/>}/>
+      </Routes>
+      </Suspense>
     </div>
   );
 }

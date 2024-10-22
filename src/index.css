@@ -22,3 +22,7 @@ code {
   --main-color-orange-gold: #fd9e02;
   --main-color-vibrant-orange: #fb8500;
 }
+
+hr {
+  width: 100%;
+}

@@ -4,7 +4,7 @@ import { Box, FormControl, OutlinedInput, Typography } from '@mui/material';
 import React from 'react';
 import ButtonAuth from '../../common/Button';
 import { Link } from 'react-router-dom';
-import { Flexbox, FlexboxBetween } from '../../../../styles/globalStyles';
+import { Flexbox, FlexboxEnd } from '../../../../styles/globalStyles';
 
 const FormCostum = styled(Box)(({ theme }) => ({
     backgroundColor: 'var(--main-dark-midnight-blue)',
@@ -51,7 +51,7 @@ const FormLogin = () => {
                 </FormControl>
                 <Box sx={{ width: "70%" }}>
                     <StyledLink to="/forgot-password">نسيت كلمة السر؟</StyledLink>
-                    <Box sx={FlexboxBetween}>
+                    <Box sx={FlexboxEnd}>
                         <span>ليس لديك حساب؟</span>
                         <StyledLink to="/register">إنشاء حساب</StyledLink>
                     </Box>
