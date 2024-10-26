@@ -34,3 +34,19 @@ export const FlexBoxRow = {
 export const TextDecorationNone = {
     textDecoration :'none !important'
 }
+
+export const OverflowHidden = {
+    overflow:'hidden'
+}
+
+export const PositionRelative = {
+    position:'relative'
+}
+
+export const WidthFit = {
+    width:'fit-content'
+}
+
+export const TextLeft = {
+    textAlign:'left'
+}

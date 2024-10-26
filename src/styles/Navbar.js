@@ -6,7 +6,8 @@ export const NavbarContainer = {
     display:'flex',
     flexDirection:'row',
     justifyContent:'space-between',
-    alignItems:'center'
+    alignItems:'center',
+    position:'sticky'
 }
 
 // Account Icon Costum
