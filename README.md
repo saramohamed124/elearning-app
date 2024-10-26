@@ -1,6 +1,6 @@
 ### Changelog
 
-#### [Unreleased]
+#### v0.01
 - **Homepage**
   - Designed and implemented the UI for the homepage.
   
