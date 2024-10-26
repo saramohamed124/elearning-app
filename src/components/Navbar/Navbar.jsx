@@ -34,6 +34,8 @@ const Navbar = () => {
     const handleOpenProver = (event) => {
         setAnchorEl(event.currentTarget)
     }
+
+    // Handle Close
     const handleClose = () => {
         setAnchorEl(null);
     }
@@ -44,6 +46,7 @@ const Navbar = () => {
     const handleOpenProverAuth = (event) => {
         setAnchorElAcc(event.currentTarget)
     }
+    // Handle Close Auth Acc
     const handleCloseAuth = () => {
         setAnchorElAcc(null);
     }
