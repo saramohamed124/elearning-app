@@ -29,7 +29,7 @@ const Waves = () => {
         </svg>
         <ExploreHeader/>
         </Box>
-        <Box sx={{ display: {xs:'block', md:'none'}, backgroundColor:'var(--main-dark-midnight-blue)', minHeight:'200px'}}>
+        <Box sx={{ display: {xs:'block', md:'none'}, margin:'-20px 0 0 0 ', backgroundColor:'var(--main-dark-midnight-blue)', minHeight:'200px'}}>
             <ExploreHeader/>
         </Box>
     </div>

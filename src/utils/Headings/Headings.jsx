@@ -10,7 +10,7 @@ const Headings = ({children,valueColor}) => {
         padding:'5px',
         fontWeight:'bold',
         width:'fit-content',
-        margin:'20px 0',
+        margin:'20px -20px 20px 0',
         '&::after':{
             content:'""',
             position:'absolute',
@@ -19,7 +19,10 @@ const Headings = ({children,valueColor}) => {
             width:'100%',
             height:'3px',
             backgroundColor:'var(--main-color-vibrant-orange)'
-        }
+        },
+        [theme.breakpoints.down('sm')]: {
+            margin: '20px auto',
+        },
     }))
   return (
       <Heading>{children}</Heading>

@@ -72,6 +72,7 @@
 @media (max-width: 898px) {
   .header {
     display: flex;
+    height: 100%;
     flex-direction: column-reverse;
     justify-content: start;
     overflow: visible;
