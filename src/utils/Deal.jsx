@@ -23,9 +23,9 @@ const Deal = () => {
         left:'50%',
         width: '94%',
         height: 'fit-content',
-        padding: '10px',
+        padding: '10px 15px',
         backgroundColor: 'white',
-        transform: 'translateX(-50%)'
+        transform: 'translateX(-50%)',
         }))
 
     // Progress
@@ -43,7 +43,9 @@ const Deal = () => {
     
     
   return (
-    <Box sx={{...PositionRelative, ...WidthFit, ...OverflowHidden}}>
+    <Box sx={{...PositionRelative, ...WidthFit, ...OverflowHidden,minHeight:'220px',
+      boxShadow: '1px -1px 23px 1px #E1E1E1',
+    }}>
       <img src={deal_logo} alt='deal logo'/>
       <InfoDeal>
         <Typography variant='h6'>

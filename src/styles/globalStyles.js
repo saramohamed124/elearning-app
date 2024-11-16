@@ -29,6 +29,14 @@ export const FlexBoxRow = {
     flexDirection:'row'
 }
 
+export const FlexCards = {
+    display: 'flex',
+    columnGap: '25px', // Space between items
+    rowGap: '25px', // Space between items
+    justifyContent: 'center', // Align items
+    flexWrap:'wrap',
+    margin:'20px 0'
+}
 
 // Global Styles
 

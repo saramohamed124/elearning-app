@@ -1,17 +1,10 @@
 ### Changelog
 
-#### v0.01
+#### v1.02
+
 - **Homepage**
-  - Designed and implemented the UI for the homepage.
-  
-- **Header**
-  - Created a responsive header component for better navigation.
+  - Designed and implemented the UI for the Category section.
+  - Designed and implemented the UI for the Instructor section.
 
-- **Navbar**
-  - Developed the navbar UI to enhance user experience and accessibility.
-
-- **Error 404 Page**
-  - Designed a user-friendly 404 error page to guide users back to valid sections of the app.
-
-- **Login Page**
-  - Built a new UI for the login page to improve the authentication process.
+- **Common**
+  - Created the Category Home Card.
