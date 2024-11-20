@@ -4,6 +4,8 @@ import Courses from '../components/Home/components/CoursesExplore/components/Cou
 import ShowMore from '../utils/Btns/ShowMore';
 import CategoryExplore from '../components/Home/components/CategoryExplore/CategoryExplore';
 import InstructorExplore from '../components/Home/components/InstructorExplore/InstructorExplore';
+import Footer from '../components/Home/components/Footer/Footer';
+import CopyRight from '../components/Home/components/CopyRight';
 
 const Home = () => {
   return (
@@ -17,6 +19,8 @@ const Home = () => {
       <div className='container-custom'>
       <InstructorExplore/>
       </div>
+      <Footer/>
+      <CopyRight/>
       </div>
   );
 };
