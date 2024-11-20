@@ -1,20 +1,8 @@
 import React from 'react';
 import { Box, Grid2,Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const Social = ({links}) => {
-    return(
-        links.map((links, index) => (
-            <Grid2 item xs={6} sm={6} key={index}>
-              <Typography variant="body1" align="center">
-                {links}
-              </Typography>
-            </Grid2>
-          ))
-    )
-}
 const SocialLinks = () => {
-  const links = ['+20 1021135168', 'eleaning@info.com', '+20 1021135168'];
-
   return (
     <Grid2 container spacing={2}>
       <Grid2 item xs={12} md={6}>
@@ -22,7 +10,11 @@ const SocialLinks = () => {
             معلومات التواصل
         </Typography>
         <Box>
-          <Social links={links}/>
+          <Grid2 item xs={6} sm={6}>
+            <Link style={{textDecoration:'none', color:'white', display:'block', marginBottom:'5px',letterSpacing:'1px'}} to='tel:+201021135168'>1021135168 20</Link>
+            <Link style={{textDecoration:'none', color:'white', display:'block', marginBottom:'5px',letterSpacing:'1px'}} to='mailto:eleaning@info.com'>eleaning@info.com</Link>
+            <Link style={{textDecoration:'none', color:'white', display:'block', marginBottom:'5px',letterSpacing:'1px'}} to='tel:+201021135168'>1021135168 20</Link>
+          </Grid2>
         </Box>
       </Grid2>
     </Grid2>

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Box, Grid2,Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const CategoriesLink = ({categories}) => {
     return(
         categories.map((category, index) => (
             <Grid2 item xs={6} sm={3} key={index}>
-              <Typography variant="body1" align="center">
+              <Link style={{textDecoration:'none', color:'white'}} to={'/'}>
                 {category}
-              </Typography>
+              </Link>
             </Grid2>
           ))
     )
@@ -22,7 +23,7 @@ const Categories = () => {
                 الأقسام الرائجة
             </Typography>
         </Grid2>
-        <Box sx={{display:'grid', gridTemplateColumns:'repeat(2, 1fr)'}}>
+        <Box sx={{display:'grid', gridTemplateColumns:'repeat(2, 1fr)',gap:'15px'}}>
             <CategoriesLink categories={categories}/>
         </Box>
     </Box>
