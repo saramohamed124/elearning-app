@@ -4,6 +4,7 @@ import login from './login/assets/login.gif';
 import FormLogin from './login/components/FormLogin';
 import styled from '@emotion/styled';
 import { Box } from '@mui/material';
+import { ImgAuth } from '../../styles/globalStyles';
 
 const LoginPage = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -19,7 +20,7 @@ const Login = () => {
     return (
         <LoginPage>
             <FormLogin />
-            <img style={{ maxWidth: '100%', flex: '1' ,maxHeight:'600px'}} src={login} alt='login' />
+            <img style={{...ImgAuth}} src={login} alt='login' />
         </LoginPage>
     );
 };

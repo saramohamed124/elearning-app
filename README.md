@@ -8,3 +8,7 @@
 
 - **Common**
   - Created the Category Home Card.
+
+- **Auth**
+  - Designed And Implemented the UI for Register Instructor.
+  - Designed And Implemented the UI for Register Student.

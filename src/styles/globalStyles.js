@@ -1,3 +1,4 @@
+import { margin } from "@mui/system"
 
 // FLex Styles
 export const Flexbox = {
@@ -63,4 +64,30 @@ export const TextLeft = {
 // Links
 export const LinkStyle = {
     textDecoration:'none', color:'white', display:'block', marginBottom:'5px',letterSpacing:'1px'
+}
+
+// Auth
+export const ImgAuth = {
+    maxWidth: '100%', flex: '1' ,maxHeight:'600px',margin:'10px auto',placeSelf:'center'
+}
+
+export const FormCustomStyle = {
+    backgroundColor: 'var(--main-dark-midnight-blue)',
+    color: 'white',
+    padding: '0 40px',
+    flexDirection: 'column',
+    flex: '1',
+    justifyContent:'center',
+    alignContent:'center'
+}
+
+export const  FormRegisterStyle = {
+    backgroundColor: 'var(--main-dark-midnight-blue)',
+    color: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '20px',
+    flex: '1',
 }
