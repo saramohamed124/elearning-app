@@ -59,3 +59,8 @@ export const WidthFit = {
 export const TextLeft = {
     textAlign:'left'
 }
+
+// Links
+export const LinkStyle = {
+    textDecoration:'none', color:'white', display:'block', marginBottom:'5px',letterSpacing:'1px'
+}
