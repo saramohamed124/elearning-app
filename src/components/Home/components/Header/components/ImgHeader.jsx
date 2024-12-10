@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/Waves.css'
 
 // img
-import header from '../assets/header.png';
+import header from '../assets/header.jpg';
 
 const ImgHeader = () => {
   return (

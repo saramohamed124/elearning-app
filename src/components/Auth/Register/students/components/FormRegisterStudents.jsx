@@ -1,20 +1,13 @@
 import styled from '@emotion/styled';
 import { Box, FormControl, OutlinedInput, Typography } from '@mui/material';
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Flexbox, FormCustomStyle, FormRegisterStyle, Gap20 } from '../../../../../styles/globalStyles';
 import ButtonAuth from '../../../common/Button';
 import InstructorStudentCard from '../../common/InstructorStudentCard';
 
 const FormRegisterStudents = () => {
-    const FormCostum = styled(Box)(({ theme }) => ({
-        ...FormCustomStyle
-    }));
-    
-    const FormRegister = styled(Box)(({ theme }) => ({
-        ...FormRegisterStyle
-    }));
-    
+
     const Label = styled(Typography)({
         fontWeight: "bold",
         margin: '10px 0',
@@ -25,15 +18,20 @@ const FormRegisterStudents = () => {
         color: '#2D54E0',
     });
     
+    // State
+    const [firstName, setFirstName] = useState('');
   return (
-    <FormCostum sx={Flexbox}>
-    <FormRegister>
+    <Box sx={{...Flexbox,...FormCustomStyle}}>
+    <Box sx={{...FormRegisterStyle}}>
         <Typography sx={{ fontSize: '40px', fontWeight: 'bold', textAlign: 'center', margin: '50px auto' }}>
             إنشاء حساب طالب
         </Typography>
         <FormControl sx={{ width: {xs:'90%',md:'70%'} }}>
             <Label>الإسم الأول</Label>
-            <OutlinedInput type='text' sx={{ background: 'white' }} placeholder="الإسم الأول" />
+            <OutlinedInput type='text'
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            sx={{ background: 'white' }} placeholder="الإسم الأول" />
         </FormControl>
         <FormControl sx={{ width: {xs:'90%',md:'70%'} }}>
             <Label>الإسم الأخير</Label>
@@ -54,9 +52,9 @@ const FormRegisterStudents = () => {
             </Box>
         </Box>
         <ButtonAuth>إنشاء حساب</ButtonAuth>
-    </FormRegister>
+    </Box>
     <InstructorStudentCard/>
-</FormCostum>
+</Box>
 )
 }
 

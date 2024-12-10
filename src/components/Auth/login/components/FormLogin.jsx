@@ -1,7 +1,7 @@
 // FormLogin.jsx
 import styled from '@emotion/styled';
 import { Box, FormControl, OutlinedInput, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonAuth from '../../common/Button';
 import { Link } from 'react-router-dom';
 import { Flexbox, FlexboxEnd, Gap20 } from '../../../../styles/globalStyles';
@@ -35,7 +35,12 @@ const StyledLink = styled(Link)({
     color: '#2D54E0',
 });
 
+
 const FormLogin = () => {
+    
+    // State
+        const [email, setEmail] = useState('');
+    
     return (
         <FormCostum sx={Flexbox}>
             <FormLoginCostum>
@@ -44,7 +49,12 @@ const FormLogin = () => {
                 </Typography>
                 <FormControl sx={{ width: {xs:'90%',md:'70%'} }}>
                     <Label>الايميل</Label>
-                    <OutlinedInput type='email' sx={{ background: 'white' }} placeholder="الايميل" />
+                    <OutlinedInput
+                    type='email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    sx={{ background: 'white' }}
+                    placeholder="الايميل" />
                 </FormControl>
                 <FormControl sx={{ width: {xs:'90%',md:'70%'} }}>
                     <Label>كلمة المرور</Label>

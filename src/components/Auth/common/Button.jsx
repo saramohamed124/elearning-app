@@ -15,7 +15,7 @@ const ButtonAuth = ({children,...props}) => {
         },
     }))    
       return (
-    <RegisterButton variant="contained" {...props}>{children}</RegisterButton>
+    <RegisterButton type='submit' variant="contained" {...props}>{children}</RegisterButton>
   )
 }
 
