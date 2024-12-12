@@ -2,19 +2,18 @@ import styled from '@emotion/styled'
 import { Typography } from '@mui/material'
 import React from 'react'
 
-const ErrorInputs = ({errorMsg, visible}) => {
+const ErrorInputs = React.memo(({errorMsg, visible}) => {
     const ErrorStyledCustom = styled(Typography)({
         display:'block',
-        color:'white',
-        background:'rgb(255, 0, 0 , 0.5)',
-        padding:'10px 15px',
-        margin:'10px',
-        borderRadius:'7px'
+        color:'#D32F2F',
+        padding:'5px',
+        borderRadius:'7px',
+        fontWeight: "bold"
     })
     if(!visible) return null;
   return (
     <ErrorStyledCustom>{errorMsg}</ErrorStyledCustom>
   )
-}
+})
 
 export default ErrorInputs

@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { Button, darken } from '@mui/material'
 import React from 'react'
 
-const ButtonAuth = ({children,...props}) => {
+const ButtonAuth = React.memo(({children,...props}) => {
     const RegisterButton = styled(Button)(({theme}) =>({
         backgroundColor:'var(--main-color-vibrant-orange)',
         color:'black',
@@ -17,6 +17,6 @@ const ButtonAuth = ({children,...props}) => {
       return (
     <RegisterButton type='submit' variant="contained" {...props}>{children}</RegisterButton>
   )
-}
+})
 
 export default ButtonAuth
