@@ -19,10 +19,7 @@ const FormReset = () => {
                 <Label> الإيميل</Label>
                 <OutlinedInput type='text' sx={{ background: 'white' }} placeholder="الإيميل" />
             </FormControl>
-            <FormControl sx={{ width: {xs:'90%',md:'70%'} }}>
-                <Label>كلمة المرور الجديدة</Label>
-                <OutlinedInput type='text' sx={{ background: 'white' }} placeholder="كلمة المرور الجديدة" />
-            </FormControl>
+            <Typography>سوف يتم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.</Typography>
             <ButtonAuth>تعيين كلمة المرور</ButtonAuth>
         </FormGroup>
     </Box>

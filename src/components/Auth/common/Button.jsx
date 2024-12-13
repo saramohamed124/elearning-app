@@ -8,7 +8,7 @@ const ButtonAuth = React.memo(({children,...props}) => {
         color:'black',
         fontWeight:'bold',
         padding:'10px 35px',
-        margin:'10px auto',
+        margin:'10px auto 50px auto',
         borderRadius:'5px',
         '&:hover': {
             backgroundColor: darken('#fb8500', 0.2),

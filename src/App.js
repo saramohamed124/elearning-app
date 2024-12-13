@@ -16,12 +16,12 @@ function App() {
       <Suspense fallback={<Loader/>}>
       <Navbar/>
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register-student' element={<RegisterStudent/>}/>
-        <Route path='/register-instructor' element={<RegisterInstructor/>}/>
-        <Route path='/reset-password' element={<ResetPass/>}/>
-        <Route path='*' element={<PageNotFound/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register-student" element={<RegisterStudent/>}/>
+        <Route path="/register-instructor" element={<RegisterInstructor/>}/>
+        <Route path="/forget-password" element={<ResetPass/>}/>
+        <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       </Suspense>
     </div>

@@ -1,5 +1,3 @@
-import { margin } from "@mui/system"
-
 // FLex Styles
 export const Flexbox = {
     display:'flex',
@@ -91,3 +89,20 @@ export const  FormRegisterStyle = {
     gap: '20px',
     flex: '1',
 }
+
+export const FormLoginCostum = {
+    backgroundColor: 'var(--main-dark-midnight-blue)',
+    color: 'white',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '20px',
+    flex: '1',
+}
+
+// Link
+export const StyledLink = {
+    display:'block',
+    color: '#2D54E0',
+    }

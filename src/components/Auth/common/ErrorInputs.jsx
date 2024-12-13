@@ -5,7 +5,7 @@ import React from 'react'
 const ErrorInputs = React.memo(({errorMsg, visible}) => {
     const ErrorStyledCustom = styled(Typography)({
         display:'block',
-        color:'#D32F2F',
+        color:'var(--main-color-error)',
         padding:'5px',
         borderRadius:'7px',
         fontWeight: "bold"

@@ -2,7 +2,7 @@ import { Box } from '@mui/material'
 import React from 'react'
 import Headings from '../../../../utils/Headings/Headings'
 import { FlexCards } from '../../../../styles/globalStyles'
-import CategoryHomeCard from '../../../Auth/common/CategoryHomeCard'
+import CategoryHomeCard from '../CategoryHomeCard'
 
 // Icons
 import buisness_icon from './assets/business.svg'

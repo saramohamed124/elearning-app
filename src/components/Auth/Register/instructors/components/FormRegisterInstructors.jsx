@@ -1,26 +1,38 @@
+// React & React Hooks & React Router Dom
+import React, { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
+// MUI
 import styled from '@emotion/styled';
-import { Box, FormControl, FormLabel, MenuItem, OutlinedInput, Select, TextareaAutosize, Typography } from '@mui/material';
-import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { Flexbox, FormCustomStyle, FormRegisterStyle, Gap20 } from '../../../../../styles/globalStyles';
+import { Box, FormControl, FormLabel, OutlinedInput, TextareaAutosize, Typography } from '@mui/material';
+
+// Global Styles
+import { Flexbox, FormCustomStyle, FormRegisterStyle, Gap20, StyledLink } from '../../../../../styles/globalStyles';
+
+// Commons
 import ButtonAuth from '../../../common/Button';
 import InstructorStudentCard from '../../common/InstructorStudentCard';
 import ErrorInputs from '../../../common/ErrorInputs';
 import TextInput from '../../../common/TextInput';
+
+// API & End Point
 import { api } from '../../../../../api/api';
+import { REGISTER_INSTRUCTORS } from '../../../endpoints/endpoints';
+
+// Loader
 import Spinner from '../../../../../utils/Loader/Spinner';
-import toast, { Toaster } from 'react-hot-toast';
 
+// Form Reducer & Action Types & validation
+import { ACTION_TYPES } from '../../../constants/ActionTypes';
+import { formReducer } from '../../../reducers/formReducer';
+import { validateInputs } from '../../../utils/validateInputs';
 
-// API
-const  REGISTER_INSTRUCTORS = 'api/Auth/register-instructor'
+// Utils For Auth
+import { ErrorMsgToast, SuccessMsgToast } from '../../../utils/toasts';
+import { ToastWrapper } from '../../../utils/ToasterWrapper';
+import { handleChangeField } from '../../../reducers/handleChangeField';
+import { handleFocus } from '../../../reducers/handleFocus';
 
-// Validation
-const NAME_REGEX = /^[a-zA-Z\u0600-\u06FF\s][a-zA-Z\u0600-\u06FF0-9-_]{2,24}/; 
-const MAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]){7,24}/; 
-const SPECIALTY_REGEX = /^[a-zA-Z\u0600-\u06FF\s]{5,24}$/;
-const BIO_REGEX = /^.{9,100}/;
 
 // State
 const intialState = {
@@ -30,7 +42,7 @@ const intialState = {
     pwd: '',
     specialty: '',
     bio: '',
-    success: 'success',
+    success: '',
     error: '',
     loading: false,
     isValid:{
@@ -51,89 +63,30 @@ const intialState = {
     }
 }
 
-// Action Types
-const ACTION_TYPES = {
-    SET_FIELD: 'SET_FIELD',
-    SET_VALIDATY: 'SET_VALIDATY',
-    SET_FOCUS: 'SET_FOCUS',
-    SET_SUCCESS: 'SET_SUCCESS',
-    SET_ERROR: 'SET_ERROR',
-    SET_LOADING: 'SET_LOADING',
-}
-
-// Form Reducer
-const formReducer = (state, action) => {
-    switch(action.type){
-        case ACTION_TYPES.SET_FIELD:
-            return {...state, [action.field]: action.value};
-        case ACTION_TYPES.SET_FOCUS:
-            return {...state, isFocus: {...state.isFocus, [action.field]: action.isFocus}};    
-        case ACTION_TYPES.SET_VALIDATY:
-            return {...state, isValid: {...state.isValid, [action.field]: action.isValid}};    
-        case ACTION_TYPES.SET_SUCCESS:
-            return {...state, success: action.success, error: '', loading: false};
-        case ACTION_TYPES.SET_ERROR:
-            return {...state, error: action.error, success: '', loading: false};
-        case ACTION_TYPES.SET_LOADING:
-            return {...state, loading: action.loading};
-        default:
-            return state;
-    }
-}
-
 const FormRegisterInstructors = () => {
-    // Styles    
+    // Styles
     const FormLabelCustom = styled(FormLabel)({
         fontWeight: "bold",
         margin: '10px 0',
         color:'white'
     });
 
-    const StyledLink = styled(Link)({
-        display:'block',
-        color: '#2D54E0',
-    });
-
     const [state, dispatch] = useReducer(formReducer, intialState);
 
     // Ref
     const userRef = useRef();
-    toast.success(state.success, {
-        position: "top-left",
-        // duration: 20000, 
-        style:{
-            backgroundColor:'var(--main-color-orange-gold)',
-            color:'white',
-            fontSize:'16px',
-            padding:'10px',
-            icon: '✔️',
-        }
-    });
+    
+    // navigation
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/forget-password';
 
     // Use Effect 
     useEffect(() => {
-        userRef.current.focus();
+        userRef.current?.focus();
     }, [])
 
      // Validation
-    const validateInputs = useCallback((field,value) => {
-        switch(field){
-            case 'firstName':
-            case 'lastName':
-                return NAME_REGEX.test(value);
-            case 'email':
-                return MAIL_REGEX.test(value);
-            case 'pwd':
-                return PWD_REGEX.test(value);
-            case 'specialty':
-                return SPECIALTY_REGEX.test(value);
-            case 'bio':
-                return  BIO_REGEX.test(value);;
-            default:
-                return value;
-        }
-    },[])
-
     useEffect(() => {
         const validationFields = () => {
             Object.keys(state).forEach((key) => {
@@ -144,17 +97,7 @@ const FormRegisterInstructors = () => {
             })
         }    
         validationFields();
-    },[state, validateInputs])
-
-    // Handle Change Field
-    const handleChangeField = useCallback((field,value) => {
-        dispatch({type: ACTION_TYPES.SET_FIELD, field, value})
-    }, []);
-
-    // Handle Focus Field
-    const handleFocus = useCallback((field,value) => {
-        dispatch({ type: ACTION_TYPES.SET_FOCUS, field, isFocus: value})
-    },[])
+    },[state])
 
     // Form Style
     const formStyle = useMemo(() => ({ width: {xs:'90%',md:'70%'} }) ,[]);
@@ -166,7 +109,7 @@ const FormRegisterInstructors = () => {
         dispatch({type: ACTION_TYPES.SET_LOADING, loading: true});
         try{
             const formData = {firstName: firstName, lastName: lastName, email: email, password: pwd, expertise: specialty, biography: bio}
-            const res = await api.post(REGISTER_INSTRUCTORS,
+            await api.post(REGISTER_INSTRUCTORS,
                 formData,
                 {
                     headers:{
@@ -175,30 +118,25 @@ const FormRegisterInstructors = () => {
                     }
                 }
             )
-            dispatch({type: ACTION_TYPES.SET_SUCCESS, success:'تم إنشاء الحساب بنجاح.'})
-            toast.success(state.success, {
-                position: "top-left",
-                duration: 20000, 
-                style:{
-                    backgroundColor:'var(--main-color-green)',
-                    color:'white',
-                    fontSize:'16px',
-                    padding:'10px',
-                    icon: '✔️',
-                }
-            });
-            const { token } = res.token;
-            localStorage.setItem('userToken',token)
+            const successMsg = 'تم إنشاء الحساب بنجاح.';
+            dispatch({type: ACTION_TYPES.SET_SUCCESS, success: successMsg})
+            SuccessMsgToast(successMsg);
+            setTimeout(() => {
+            navigate(from, {replace: true});
+            },2000)
         }catch(err){
-            if(err?.status){
-                dispatch({type: ACTION_TYPES.SET_ERROR, error: 'هذا الحساب موجود من قبل'})
-            }else{
-                dispatch({type: ACTION_TYPES.SET_ERROR, error: 'حدث خطأ أثناء تسجيل الدخول يرجي المحاولة لاحقا'})
+            const errMsg = err?.status ? 'هذا الحساب موجود من قبل':'حدث خطأ أثناء تسجيل الدخول يرجي المحاولة لاحقا';
+            dispatch({type: ACTION_TYPES.SET_ERROR, error : errMsg})
+            ErrorMsgToast(errMsg)
+            if(err?.status === 400){
+                setTimeout(() => {
+                    navigate('/login')
+                } ,2000)
             }
         }finally{
             dispatch({type: ACTION_TYPES.SET_LOADING, loading: false})
         }
-    },[state])
+    },[from, navigate, state])
 
     return (
         <Box sx={{...FormCustomStyle}}>
@@ -216,9 +154,9 @@ const FormRegisterInstructors = () => {
                     sx={{ background: 'white' }}
                     placeholder="الإسم الأول"
                     value={state.firstName}
-                    onChange={(e) => handleChangeField('firstName', e.target.value)}
-                    onFocus={() => handleFocus('firstName', true)}
-                    onBlur={() => handleFocus('firstName', false)}
+                    onChange={(e) => handleChangeField(dispatch, 'firstName', e.target.value)}
+                    onFocus={() => handleFocus(dispatch, 'firstName', true)}
+                    onBlur={() => handleFocus(dispatch, 'firstName', false)}
                     required
                     />
                     <ErrorInputs errorMsg={'يجب أن يحتوي الاسم علي حروف من 3 إلى 24 حرف'} visible={state.firstName && state.isFocus.firstName && !state.isValid.firstName} />
@@ -226,11 +164,11 @@ const FormRegisterInstructors = () => {
             <TextInput 
                 id={'lastname'}
                 value={state.lastName}
-                onChange={(e) => handleChangeField('lastName', e.target.value)}
+                onChange={(e) => handleChangeField(dispatch, 'lastName', e.target.value)}
                 type={'text'}
                 label={'الاسم الأخير'}
-                focus={() => handleFocus('lastName', true)}
-                setFocus={() => handleFocus('lastName', false)}
+                focus={() => handleFocus(dispatch, 'lastName', true)}
+                setFocus={() => handleFocus(dispatch, 'lastName', false)}
                 errorMsg={'يجب أن يحتوي الاسم علي حروف من 3 إلى 24 حرف'}
                 isValid={state.isValid.lastName}
                 isFocus={state.isFocus.lastName}
@@ -238,11 +176,11 @@ const FormRegisterInstructors = () => {
             <TextInput 
                 id={'email'}
                 value={state.email}
-                onChange={(e) => handleChangeField('email', e.target.value)}
+                onChange={(e) => handleChangeField(dispatch, 'email', e.target.value)}
                 type={'email'}
                 label={'الايميل'}
-                focus={() => handleFocus('email', true)}
-                setFocus={() => handleFocus('email', false)}
+                focus={() => handleFocus(dispatch, 'email', true)}
+                setFocus={() => handleFocus(dispatch, 'email', false)}
                 errorMsg={'يرجى إدخال ايميل صالح'}
                 isValid={state.isValid.email}
                 isFocus={state.isFocus.email}
@@ -252,9 +190,9 @@ const FormRegisterInstructors = () => {
                 value={state.pwd}
                 type={'password'}
                 label={'كلمة المرور'}
-                onChange={(e) => handleChangeField('pwd', e.target.value)}
-                focus={() => handleFocus('pwd', true)}
-                setFocus={() => handleFocus('pwd', false)}
+                onChange={(e) => handleChangeField(dispatch, 'pwd', e.target.value)}
+                focus={() => handleFocus(dispatch, 'pwd', true)}
+                setFocus={() => handleFocus(dispatch, 'pwd', false)}
                 errorMsg={'كلمة المرور يجب أن تحتوي على أحرف كبيرة وصغيرة وأرقام ورموز، ولا تقل عن 8 أحرف'}
                 isValid={state.isValid.pwd}
                 isFocus={state.isFocus.pwd}
@@ -264,9 +202,9 @@ const FormRegisterInstructors = () => {
                 value={state.specialty}
                 type={'text'}
                 label={'التخصص'}
-                onChange={(e) => handleChangeField('specialty', e.target.value)}
-                focus={() => handleFocus('specialty', true)}
-                setFocus={() => handleFocus('specialty', false)}
+                onChange={(e) => handleChangeField(dispatch, 'specialty', e.target.value)}
+                focus={() => handleFocus(dispatch, 'specialty', true)}
+                setFocus={() => handleFocus(dispatch, 'specialty', false)}
                 errorMsg={'التخصص يجب ان يتكون من الأحرف فقط بشرط الا يقل عن 5 أحرف'}
                 isValid={state.isValid.specialty}
                 isFocus={state.isFocus.specialty}
@@ -277,35 +215,25 @@ const FormRegisterInstructors = () => {
                 minRows={5}
                 placeholder="السيرة الذاتية"
                 value={state.bio}
-                onChange={(e) => handleChangeField('bio', e.target.value)}
-                onFocus={() => handleFocus('bio', true)}
-                onBlur={() => handleFocus('bio', false)}
+                onChange={(e) => handleChangeField(dispatch,'bio', e.target.value)}
+                onFocus={() => handleFocus(dispatch, 'bio', true)}
+                onBlur={() => handleFocus(dispatch, 'bio', false)}
                 required
                 ></TextareaAutosize>
                 <ErrorInputs errorMsg={'يرجي كتابة وصف لا يقل عن 10 أحرف'} visible={state.bio && state.isFocus.bio && !state.isValid.bio} />
                 </FormControl>
-            <Box sx={formStyle}>
+                <Box sx={{ width: {xs:'90%',md:'70%'} }}>
                 <Box sx={{...Flexbox,...Gap20}}>
                     <span>لديك حساب بالفعل؟</span>
-                    <StyledLink to="/login">تسجيل الدخول</StyledLink>
+                    <Link style={{...StyledLink}} to="/login">تسجيل الدخول</Link>
                 </Box>
-            </Box>
+                </Box>
+            {state.loading ? <div style={{backgroundColor:'var(--main-color-vibrant-orange)', color:'black', fontWeight:'bold', padding:'10px 35px', margin:'10px auto', borderRadius:'5px'}}> <Spinner/></div> :
             <ButtonAuth
                 disabled={!Object.values(state.isValid).every(Boolean)}
-                >{state.loading ? <Spinner/> : 'إنشاء حساب'}</ButtonAuth>
+                > إنشاء حساب</ButtonAuth>}
         </Box>
-        {/* <Toaster
-            toastOptions={{
-                success: {
-                    style: {
-                    border: "1px solid #4caf50",
-                    padding: "16px",
-                    color: "#4caf50",
-                    },
-                },
-                }}
-                /> */}
-        <p style={{color: 'green'}}>{state.success}</p>
+        <ToastWrapper/>
         <InstructorStudentCard/>
         </Box>
 )
