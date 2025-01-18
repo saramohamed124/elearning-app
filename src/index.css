@@ -1,22 +1,36 @@
 /* Fonts Google */
-@font-face {
-  font-family: Inter-italic;
-  src: url(../public/fonts/inter_italic.ttf);
-}
 
 @font-face {
-  font-family: Inter-normal;
-  src: url(../public/fonts/inter_normal.ttf);
+  font-family: "Inter";
+  src: url("../public/fonts/inter_normal.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Italic */
+
+@font-face {
+  font-family: "Inter-italic";
+  src: url("../public/fonts/inter_italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
   direction: rtl;
   margin: 0;
-  font-family: Inter-normal;
+  font-family: Inter, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  direction: rtl;
+  margin: 0;
+  font-family: Inter, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 :root {
   --main-dark-midnight-blue: #023047;
   --main-color-dark-teal: #126782;

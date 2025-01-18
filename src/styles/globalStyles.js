@@ -27,6 +27,10 @@ export const FlexBoxRow = {
     ...Flexbox,
     flexDirection:'row'
 }
+export const FlexBoxCol = {
+    ...Flexbox,
+    flexDirection:'column'
+}
 
 export const FlexCards = {
     display: 'flex',
@@ -105,4 +109,25 @@ export const FormLoginCostum = {
 export const StyledLink = {
     display:'block',
     color: '#2D54E0',
-    }
+}
+
+// Verfied Email
+export const VerfiedEmailText = {
+    textAlign:'center',
+    fontSize:'1.5rem',
+    color:'var(--main-dark-midnight-blue)',
+    fontWeight:'bold'
+}
+
+export const VerfiedEmailBtn = {
+    backgroundColor:'var(--main-dark-midnight-blue)',
+    color:'white',
+    padding:'15px 25px',
+    borderRadius:'5px',
+    border:'none',
+    outline:'none',
+    cursor:'pointer',
+    fontSize:'1.1rem',
+    fontWeight:'bold',
+    textDecoration:'none',
+}

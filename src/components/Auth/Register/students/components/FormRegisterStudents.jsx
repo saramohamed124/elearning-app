@@ -47,7 +47,7 @@ const FormRegisterStudents = () => {
     // navigation
     const location = useLocation();
     const navigate = useNavigate();
-    const from = location.state?.from?.pathname || '/forget-password';
+    const from = location.state?.from?.pathname || '/verify-email';
 
     // Validation
         useEffect(() => {

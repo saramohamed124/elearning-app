@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import './App.css';
 import Loader from './utils/Loader/Loader';
 import { Route, Routes } from 'react-router-dom';
@@ -9,6 +9,7 @@ const Login = React.lazy(() => import('./components/Auth/Login')) ;
 const RegisterStudent = React.lazy(() => import('./components/Auth/RegisterStudent')) ;
 const RegisterInstructor = React.lazy(() => import('./components/Auth/RegisterInstructor')) ;
 const ResetPass = React.lazy(() => import('./components/Auth/ResetPass')) ;
+const  VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/register-student" element={<RegisterStudent/>}/>
         <Route path="/register-instructor" element={<RegisterInstructor/>}/>
         <Route path="/forget-password" element={<ResetPass/>}/>
+        <Route path="/verify-email" element={<VerfiedEmail/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       </Suspense>
