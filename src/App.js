@@ -1,9 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import './App.css';
 import Loader from './utils/Loader/Loader';
 import { Route, Routes } from 'react-router-dom';
 import PageNotFound from './utils/Error/PageNotFound';
 import Navbar from './components/Navbar/Navbar';
+import ResendVerfiedEmail from './components/Auth/ResendVerfiedEmail';
 const Home = React.lazy(() => import('./pages/Home')) ;
 const Login = React.lazy(() => import('./components/Auth/Login')) ;
 const RegisterStudent = React.lazy(() => import('./components/Auth/RegisterStudent')) ;
@@ -23,6 +24,7 @@ function App() {
         <Route path="/register-instructor" element={<RegisterInstructor/>}/>
         <Route path="/forget-password" element={<ResetPass/>}/>
         <Route path="/verify-email" element={<VerfiedEmail/>}/>
+        <Route path="/resend-email" element={<ResendVerfiedEmail/>}/>
         <Route path="*" element={<PageNotFound/>}/>
       </Routes>
       </Suspense>

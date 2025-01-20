@@ -103,7 +103,7 @@ const FormRegisterStudents = () => {
             <Typography sx={{ fontSize: '40px', fontWeight: 'bold', textAlign: 'center', margin: '50px auto' }}>
                 إنشاء حساب طالب
             </Typography>
-            <TextInput 
+            <TextInput color = "white" 
                 id={'firstName'}
                 value={state.firstName}
                 onChange={(e) => handleChangeField(dispatch,'firstName', e.target.value)}
@@ -115,7 +115,7 @@ const FormRegisterStudents = () => {
                 isValid={state.isValid.firstName}
                 isFocus={state.isFocus.firstName}
                 />
-                <TextInput 
+                <TextInput color = "white" 
                     id={'lastname'}
                     value={state.lastName}
                     onChange={(e) => handleChangeField(dispatch, 'lastName', e.target.value)}
@@ -127,7 +127,7 @@ const FormRegisterStudents = () => {
                     isValid={state.isValid.lastName}
                     isFocus={state.isFocus.lastName}
                     />
-                <TextInput 
+                <TextInput color = "white" 
                     id={'email'}
                     value={state.email}
                     onChange={(e) => handleChangeField(dispatch, 'email', e.target.value)}
@@ -139,7 +139,7 @@ const FormRegisterStudents = () => {
                     isValid={state.isValid.email}
                     isFocus={state.isFocus.email}
                     />
-                <TextInput 
+                <TextInput color = "white" 
                     id={'password'}
                     value={state.pwd}
                     type={'password'}

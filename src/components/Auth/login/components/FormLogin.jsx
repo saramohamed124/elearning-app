@@ -111,7 +111,7 @@ const FormLogin = () => {
                 <Typography sx={{ fontSize: '40px', fontWeight: 'bold', textAlign: 'center', margin: '50px auto' }}>
                     تسجيل الدخول
                 </Typography>
-                <TextInput
+                <TextInput color = "white"
                 id={'email'}
                 value={state.email}
                 onChange={(e) => handleChangeField(dispatch, 'email', e.target.value)}
@@ -123,7 +123,7 @@ const FormLogin = () => {
                 isValid={state.isValid.email}
                 isFocus={state.isFocus.email}
                 />
-            <TextInput 
+            <TextInput color = "white" 
                 id={'password'}
                 value={state.pwd}
                 type={'password'}

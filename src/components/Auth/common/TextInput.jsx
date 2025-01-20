@@ -3,11 +3,11 @@ import { FormControl, FormLabel, OutlinedInput } from '@mui/material';
 import React from 'react'
 import ErrorInputs from './ErrorInputs';
 
-const TextInput = React.memo(({id, label, type, value, onChange, focus, setFocus, isValid, isFocus, errorMsg}) => {
+const TextInput = React.memo(({id, label, type, value, color, onChange, focus, setFocus, isValid, isFocus, errorMsg}) => {
     const FormLabelCustom = styled(FormLabel)({
         fontWeight: "bold",
         margin: '10px 0',
-        color:'white'
+        color:color
     });
     
 

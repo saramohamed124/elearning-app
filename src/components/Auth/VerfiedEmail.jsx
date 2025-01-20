@@ -9,8 +9,10 @@ const VerfiedEmail = () => {
     flexDirection:'column',
     justifyContent:'center',
     alignItems:'center',
-    height:'90vh'
-  }))
+    height:'90vh',
+    padding:'20px',
+  }));
+
   return (
     <Box>
       <VerfiedEmail>

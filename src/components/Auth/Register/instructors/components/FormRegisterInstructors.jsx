@@ -161,7 +161,7 @@ const FormRegisterInstructors = () => {
                     />
                     <ErrorInputs errorMsg={'يجب أن يحتوي الاسم علي حروف من 3 إلى 24 حرف'} visible={state.firstName && state.isFocus.firstName && !state.isValid.firstName} />
             </FormControl>
-            <TextInput 
+            <TextInput color = "white" 
                 id={'lastname'}
                 value={state.lastName}
                 onChange={(e) => handleChangeField(dispatch, 'lastName', e.target.value)}
@@ -173,7 +173,7 @@ const FormRegisterInstructors = () => {
                 isValid={state.isValid.lastName}
                 isFocus={state.isFocus.lastName}
                 />
-            <TextInput 
+            <TextInput color = "white" 
                 id={'email'}
                 value={state.email}
                 onChange={(e) => handleChangeField(dispatch, 'email', e.target.value)}
@@ -185,7 +185,7 @@ const FormRegisterInstructors = () => {
                 isValid={state.isValid.email}
                 isFocus={state.isFocus.email}
                 />
-            <TextInput 
+            <TextInput color = "white" 
                 id={'password'}
                 value={state.pwd}
                 type={'password'}
@@ -197,7 +197,7 @@ const FormRegisterInstructors = () => {
                 isValid={state.isValid.pwd}
                 isFocus={state.isFocus.pwd}
                 />
-            <TextInput 
+            <TextInput color = "white" 
                 id={'specialty'}
                 value={state.specialty}
                 type={'text'}
