@@ -10,7 +10,7 @@ const VerfiedEmail = () => {
     justifyContent:'center',
     alignItems:'center',
     height:'90vh',
-    padding:'20px',
+    padding:'10px',
   }));
 
   return (

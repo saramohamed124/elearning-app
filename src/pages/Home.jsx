@@ -19,8 +19,6 @@ const Home = () => {
       <div className='container-custom'>
       <InstructorExplore/>
       </div>
-      <Footer/>
-      <CopyRight/>
       </div>
   );
 };

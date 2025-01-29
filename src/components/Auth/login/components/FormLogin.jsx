@@ -54,7 +54,7 @@ const FormLogin = () => {
             // navigation
             const location = useLocation();
             const navigate = useNavigate();
-            const from = location.state?.from?.pathname || '/verify-email';
+            const from = location.state?.from?.pathname || '/';
         
             // Validation
                 useEffect(() => {
@@ -76,7 +76,7 @@ const FormLogin = () => {
                 dispatch({type: ACTION_TYPES.SET_LOADING, loading: true});
                 try{
                     const formData = { email: email, password: pwd}
-                    await api.post(LOGIN,
+                    const response = await api.post(LOGIN,
                         formData,
                         {
                             headers:{
@@ -88,6 +88,8 @@ const FormLogin = () => {
                     const successMsg = 'تم تسجيل الدخول بنجاح';
                     dispatch({type: ACTION_TYPES.SET_SUCCESS, success: successMsg})
                     SuccessMsgToast(successMsg);
+                    console.log(response);
+                    const refreshToken = response?.data.refreshToken;
                     setTimeout(() => {
                     navigate(from, {replace: true});
                     }, 2000)
