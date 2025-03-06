@@ -12,9 +12,10 @@ import { validateInputs } from '../../../utils/validateInputs';
 import { ACTION_TYPES } from '../../../constants/ActionTypes';
 import { ErrorMsgToast, SuccessMsgToast } from '../../../utils/toasts';
 import { api } from '../../../../../api/api';
-import { REGISTER_STUDENTS } from '../../../endpoints/endpoints';
+import { REGISTER_STUDENTS } from '../../../../../api/endpoints';
 import Spinner from '../../../../../utils/Loader/Spinner';
 import { ToastWrapper } from '../../../utils/ToasterWrapper';
+import { setToken } from '../../../../../services/authServices';
 
 // State
 const intialState = {
@@ -69,7 +70,7 @@ const FormRegisterStudents = () => {
         dispatch({type: ACTION_TYPES.SET_LOADING, loading: true});
         try{
             const formData = {firstName: firstName, lastName: lastName, email: email, password: pwd}
-            await api.post(REGISTER_STUDENTS,
+            const response = await api.post(REGISTER_STUDENTS,
                 formData,
                 {
                     headers:{
@@ -80,6 +81,8 @@ const FormRegisterStudents = () => {
             )
             const successMsg = 'تم إنشاء الحساب بنجاح.';
             dispatch({type: ACTION_TYPES.SET_SUCCESS, success: successMsg})
+            const { token, refreshToken, tokenExpiration, id, role} = response?.data?.data;
+            setToken(token, refreshToken, tokenExpiration, id, email, role);
             SuccessMsgToast(successMsg);
             setTimeout(() => {
             navigate(from, {replace: true});

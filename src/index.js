@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { AuthProvider } from './context/AuthProvider';
+import InstructorInfoProvider from './context/InstructorInfoProvider';
 
 const theme = createTheme({
   breakpoints: {
@@ -23,6 +24,7 @@ const theme = createTheme({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <InstructorInfoProvider>
     <AuthProvider>
     <BrowserRouter>
     <ThemeProvider theme={theme}>
@@ -30,6 +32,7 @@ root.render(
     </ThemeProvider>
     </BrowserRouter>
     </AuthProvider>
+    </InstructorInfoProvider>
   </React.StrictMode>
 );
 

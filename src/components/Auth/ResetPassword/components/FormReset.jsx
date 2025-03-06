@@ -4,7 +4,7 @@ import { Box, FormControl, FormGroup, OutlinedInput, Typography } from '@mui/mat
 import styled from '@emotion/styled';
 import ButtonAuth from '../../common/Button';
 import { api } from '../../../../api/api';
-import { FORGET_PWD } from '../../endpoints/endpoints';
+import { FORGET_PWD } from '../../../../api/endpoints';
 import TextInput from '../../common/TextInput';
 import { MAIL_REGEX } from '../../constants/regex';
 import ErrorInputs from '../../common/ErrorInputs';

@@ -14,10 +14,14 @@ const RegisterInstructor = React.lazy(() => import('./components/Auth/RegisterIn
 const ResetPass = React.lazy(() => import('./components/Auth/ResetPass')) ;
 const  VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
 
+const ROLES = {
+  INSTRUCTOR: "Instructor",
+  STUDENT: "Student"
+}
 
 function App() {
   const location = useLocation();
-  const hideLayoutRoutes = ['/verify-email', '/resend-email'];
+  const hideLayoutRoutes = ['/verify-email', '/resend-email','/instructor-profile'];
   const authRoutes = ['/login', '/register-student', '/register-instructor', '/forget-password'];
 
   // Logic to determine visibility of Navbar and Footer

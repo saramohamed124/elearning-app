@@ -19,16 +19,19 @@ import styled from '@emotion/styled';
 import logo from '../assets/logo.png';
 
 // icon
-import account_icon from './assets/account.svg';
-import bar_icon from './assets/bar.svg';
-import courses_icon from './assets/courses.svg'
-import category_icon from './assets/category.svg'
-import instructor_icon from './assets/instructor.svg'
+import account_icon from './assets/icons/account.svg';
+import bar_icon from './assets/icons/bar.svg';
+import courses_icon from './assets/icons/courses.svg'
+import category_icon from './assets/icons/category.svg'
+import instructor_icon from './assets/icons/instructor.svg'
+import { getToken } from '../../services/authServices';
+import AuthProfile from './components/AuthProfile';
 
 const Navbar = () => {
     const [AnchorEl, setAnchorEl] = useState(null);
     const [AnchorElAcc, setAnchorElAcc] = useState(null);
 
+    const { accessToken } = getToken();
 
     // Handle Open Prover Links
     const handleOpenProver = (event) => {
@@ -79,8 +82,12 @@ const Navbar = () => {
               <img src={item.src} alt={item.name}/>
             </ListItem>
           ))}
-           <hr/>
-            <AuthLinks/>
+          <hr/>
+          {accessToken ? 
+          <AuthProfile/>
+          :<AuthLinks/>
+        }
+            
         </List>
       </Popover>
         <Box sx={{...AccountIconCostum,
@@ -106,7 +113,10 @@ const Navbar = () => {
           horizontal: 'center',
         }}
       >
-        <AuthLinks/>
+        {accessToken ?
+        <AuthProfile/>
+        : <AuthLinks/>
+      }
       </Popover>
 
         <Box 

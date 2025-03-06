@@ -5,8 +5,8 @@ import { LinkCostum } from '../Navbar'
 import {FlexboxBetween} from '../../../styles/globalStyles'
 
 // Icons
-import register_icon from '../assets/register.svg'
-import login_icon from '../assets/login.svg'
+import register_icon from '../assets/icons/register.svg'
+import login_icon from '../assets/icons/login.svg'
 
 const AuthLinks = () => {
   return (

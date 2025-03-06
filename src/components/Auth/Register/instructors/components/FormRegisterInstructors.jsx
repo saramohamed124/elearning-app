@@ -17,7 +17,7 @@ import TextInput from '../../../common/TextInput';
 
 // API & End Point
 import { api } from '../../../../../api/api';
-import { REGISTER_INSTRUCTORS } from '../../../endpoints/endpoints';
+import { REGISTER_INSTRUCTORS } from '../../../../../api/endpoints';
 
 // Loader
 import Spinner from '../../../../../utils/Loader/Spinner';
@@ -32,6 +32,7 @@ import { ErrorMsgToast, SuccessMsgToast } from '../../../utils/toasts';
 import { ToastWrapper } from '../../../utils/ToasterWrapper';
 import { handleChangeField } from '../../../reducers/handleChangeField';
 import { handleFocus } from '../../../reducers/handleFocus';
+import { setToken } from '../../../../../services/authServices';
 
 
 // State
@@ -109,7 +110,7 @@ const FormRegisterInstructors = () => {
         dispatch({type: ACTION_TYPES.SET_LOADING, loading: true});
         try{
             const formData = {firstName: firstName, lastName: lastName, email: email, password: pwd, expertise: specialty, biography: bio}
-            await api.post(REGISTER_INSTRUCTORS,
+            const response = await api.post(REGISTER_INSTRUCTORS,
                 formData,
                 {
                     headers:{
@@ -121,6 +122,8 @@ const FormRegisterInstructors = () => {
             const successMsg = 'تم إنشاء الحساب بنجاح.';
             dispatch({type: ACTION_TYPES.SET_SUCCESS, success: successMsg})
             SuccessMsgToast(successMsg);
+            const { token, refreshToken, tokenExpiration, id, role} = response?.data?.data;
+            setToken(token, refreshToken, tokenExpiration, id, email, role);
             setTimeout(() => {
             navigate(from, {replace: true});
             },2000)

@@ -14,8 +14,9 @@ import { ErrorMsgToast, SuccessMsgToast } from '../../utils/toasts';
 import { api } from '../../../../api/api';
 import { validateInputs } from '../../utils/validateInputs';
 import Spinner from '../../../../utils/Loader/Spinner';
-import { LOGIN } from '../../endpoints/endpoints';
+import { LOGIN } from '../../../../api/endpoints';
 import { ToastWrapper } from '../../utils/ToasterWrapper';
+import { setToken } from '../../../../services/authServices';
 
 const FormCostum = styled(Box)(({ theme }) => ({
     backgroundColor: 'var(--main-dark-midnight-blue)',
@@ -88,8 +89,10 @@ const FormLogin = () => {
                     const successMsg = 'تم تسجيل الدخول بنجاح';
                     dispatch({type: ACTION_TYPES.SET_SUCCESS, success: successMsg})
                     SuccessMsgToast(successMsg);
-                    console.log(response);
-                    const refreshToken = response?.data.refreshToken;
+            const { token, refreshToken, tokenExpiration, id, role} = response?.data?.data;
+            setToken(token, refreshToken, tokenExpiration, id, email, role);
+                    // console.log(response?.data?.data?.tokenExpiration);
+                    
                     setTimeout(() => {
                     navigate(from, {replace: true});
                     }, 2000)

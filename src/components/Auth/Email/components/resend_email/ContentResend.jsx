@@ -7,7 +7,7 @@ import { VerfiedEmailBtn } from '../../../../../styles/globalStyles'
 import { FlexboxCenter,FlexBoxCol } from '../../../../../styles/globalStyles'
 import TextInput from '../../../common/TextInput'
 import { api } from '../../../../../api/api'
-import { RESEND_EMAIL } from '../../../endpoints/endpoints'
+import { RESEND_EMAIL } from '../../../../../api/endpoints'
 import { ToastWrapper } from '../../../utils/ToasterWrapper'
 import { SuccessMsgToast } from '../../../utils/toasts'
 
