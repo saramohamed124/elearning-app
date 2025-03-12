@@ -32,6 +32,13 @@ export const FlexBoxCol = {
     flexDirection:'column'
 }
 
+export const FlexboxWrap = {
+    ...Flexbox,
+    flexWrap:'wrap',
+    justifyContent:'center',
+    alignItems:'center'
+}
+
 export const FlexCards = {
     display: 'flex',
     columnGap: '25px', // Space between items

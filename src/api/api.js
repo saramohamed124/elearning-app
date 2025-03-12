@@ -8,7 +8,7 @@ export const api = axios.create({
 api.interceptors.request.use(
     async (config) => {
         const { accessToken, expiresIn } = getToken();        
-        if(Date.now() >= expiresIn) {
+        if(Date.now() >= expiresIn || accessToken === isNaN) {
             try{
             const { newAccessToken } = await refreshToken();
             config.headers.Authorization = `Bearer ${newAccessToken}`;

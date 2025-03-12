@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, List, ListItem, styled, Typography } from '@mui/material'
-import React, { useContext } from 'react'
+import React from 'react'
 import { ProverCostum } from '../../../styles/Navbar'
 import {FlexboxBetween} from '../../../styles/globalStyles'
 import avatar_instructor from '../assets/imgs/avatar_instructor.png';
@@ -9,16 +9,36 @@ import settings from '../assets/icons/settings.svg';
 import logout_icon from '../assets/icons/logout.svg'
 import { Link } from 'react-router-dom'
 import { getToken, logout } from '../../../services/authServices'
-import  { InstructorProvider } from '../../../context/InstructorInfoProvider'
 import { LinkCostum } from '../Navbar';
 // Cookies
 import Cookies from 'js-cookie';
+import { useQuery } from '@tanstack/react-query';
+import { studentService } from '../../../services/studentService';
+import { instructorService } from '../../../services/instructorService';
 
 const AuthProfile = () => {
     const { email } = getToken();
-    const { instructor } = useContext(InstructorProvider);
     // Role
     const role = Cookies.get('role')
+    const id = Cookies.get('id')
+
+    // Fetching Instructor Info
+    const {InstructorData, instructorLoading, instructorError} = useQuery({
+      queryKey:['data', id],
+      queryFn: () => instructorService(id),
+      enabled: role === "Instructor",
+      staleTime: 60000
+    });
+    const instructor = InstructorData?.data;
+
+    // Fetching Student Info
+    const {data, studentLoading, studentError} = useQuery({
+      queryKey:['data', id],
+      queryFn: () => studentService(id),
+      enabled: role === 'Student',
+      staleTime: 60000
+    })
+    const student = data?.data;
 
     // Style 
     const LinkCustom = styled(Link)({
@@ -30,7 +50,13 @@ const AuthProfile = () => {
         width: '100%',
         color:'black',
         ...FlexboxBetween
-    })
+    });
+
+    // Loading
+    if(instructorLoading || studentLoading) return <p>جاري التحميل...</p>
+
+    // Error
+    if(instructorError || studentError) return <p>فشل تحميل الاسم</p>
   return (
     <>
     {
@@ -63,10 +89,10 @@ const AuthProfile = () => {
       <ListItem sx={{FlexboxBetween, gap:'20px',justifyContent:'center'}}>
         <Avatar
           sx={{ width: 65, height: 65 }}
-          src={avatar_student} alt='avatar instructor'/>
+          src={avatar_student} alt='avatar Student'/>
         <Box sx={{textAlign:'right'}}>
         <Typography variant='h6'>
-            أهلاً, {instructor?.firstName}
+            أهلاً, {student?.firstName}
         </Typography>
         <LinkCustom to={'/profile'}>عرض الملف الشخصي</LinkCustom>
         </Box>

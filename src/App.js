@@ -4,15 +4,18 @@ import Loader from './utils/Loader/Loader';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import PageNotFound from './utils/Error/PageNotFound';
 import Navbar from './components/Navbar/Navbar';
-import ResendVerfiedEmail from './components/Auth/ResendVerfiedEmail';
 import Footer from './components/Home/components/Footer/Footer';
 import CopyRight from './components/Home/components/CopyRight';
+import ProtectedRoutes from './routes/ProtectedRoutes';
+const UserProfle = React.lazy(() => import('./pages/UserProfle'));
+const UserProfileSettings = React.lazy(() => import('./pages/UserProfileSettings'));
 const Home = React.lazy(() => import('./pages/Home')) ;
 const Login = React.lazy(() => import('./components/Auth/Login')) ;
 const RegisterStudent = React.lazy(() => import('./components/Auth/RegisterStudent')) ;
 const RegisterInstructor = React.lazy(() => import('./components/Auth/RegisterInstructor')) ;
 const ResetPass = React.lazy(() => import('./components/Auth/ResetPass')) ;
-const  VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
+const VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
+const ResendVerfiedEmail = React.lazy(() => import('./components/Auth/ResendVerfiedEmail'));
 
 const ROLES = {
   INSTRUCTOR: "Instructor",
@@ -42,6 +45,10 @@ function App() {
         <Route path="/resend-email" element={
             <ResendVerfiedEmail/>}/>
         <Route path="*" element={<PageNotFound/>}/>
+        <Route element={<ProtectedRoutes allowedRoles={[ROLES.STUDENT]}/>}>
+          <Route path='/profile' element={<UserProfle/>}/>
+          <Route path='/profile/settings' element={<UserProfileSettings/>}/>
+        </Route>
       </Routes>
       {showFooter &&(<>
       <Footer/>

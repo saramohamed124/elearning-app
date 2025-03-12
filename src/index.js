@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 import { AuthProvider } from './context/AuthProvider';
-import InstructorInfoProvider from './context/InstructorInfoProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const theme = createTheme({
   breakpoints: {
@@ -21,10 +21,13 @@ const theme = createTheme({
   },
 })
 
+// React Query
+const clientQuery = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <InstructorInfoProvider>
+    <QueryClientProvider client={clientQuery}>
     <AuthProvider>
     <BrowserRouter>
     <ThemeProvider theme={theme}>
@@ -32,7 +35,7 @@ root.render(
     </ThemeProvider>
     </BrowserRouter>
     </AuthProvider>
-    </InstructorInfoProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

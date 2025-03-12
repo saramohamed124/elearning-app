@@ -8,7 +8,6 @@ import { FlexCards } from '../../../../../styles/globalStyles'
 const Courses = () => {
   return (
     <div>
-        <Headings valueColor={'black'}>اكتشف الدورات التعليمية</Headings>
         <Box
             sx={{...FlexCards}}>
             <Deal />
