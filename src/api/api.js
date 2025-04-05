@@ -7,16 +7,19 @@ export const api = axios.create({
 
 api.interceptors.request.use(
     async (config) => {
-        const { accessToken, expiresIn } = getToken();        
-        if(Date.now() >= expiresIn || accessToken === isNaN) {
-            try{
-            const { newAccessToken } = await refreshToken();
-            config.headers.Authorization = `Bearer ${newAccessToken}`;
-            }catch{
+        const { accessToken, expiresIn } = getToken(); 
+        // Check if the access token is expired or not   
+        const tokenExpiration = expiresIn ? Number(expiresIn) : null; // Convert to number if exists            
+        if (expiresIn && Date.now() >= tokenExpiration ) {
+            try {
+                const { newAccessToken } = await refreshToken();
+                config.headers.Authorization = `Bearer ${newAccessToken}`;
+            } catch(error) {
                 logout();
                 window.location.href = '/login';
+                return Promise.reject(new Error("Failed to refresh token"));
             }
-        }else{
+        } else {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
         return config;

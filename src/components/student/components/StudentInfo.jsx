@@ -13,9 +13,10 @@ const StudentInfo = () => {
     // Fetching Student Info
     const { data, isLoading, error } = useQuery({
         queryKey: ["student", id],
-        queryFn: () => studentService(id),
+        queryFn: () => studentService.getStudentInfo(id),
         enabled: !!id && role === "Student", // ✅ Prevents unnecessary queries
-        staleTime: 60000,
+        staleTime: 0, // Data will be considered stale immediately
+        cacheTime: 0, // Data will not be cached
     });
 
     const student = data?.data;

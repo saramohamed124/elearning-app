@@ -45,5 +45,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://elearningsystem.runasp.net/api/"
+  "proxy": "http://elearningsystem.runasp.net/api/",
+  "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.71.5"
+  }
 }

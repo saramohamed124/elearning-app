@@ -22,7 +22,14 @@ const theme = createTheme({
 })
 
 // React Query
-const clientQuery = new QueryClient();
+const clientQuery = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: Infinity, // Cache data forever
+      staleTime: Infinity, // Data will never be considered stale
+    },
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

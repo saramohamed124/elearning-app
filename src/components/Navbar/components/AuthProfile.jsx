@@ -5,6 +5,7 @@ import {FlexboxBetween} from '../../../styles/globalStyles'
 import avatar_instructor from '../assets/imgs/avatar_instructor.png';
 import avatar_student from '../assets/imgs/avatar_student.png';
 import courses from '../assets/icons/courses.svg';
+import quiz from '../assets/icons/quiz.svg';
 import settings from '../assets/icons/settings.svg';
 import logout_icon from '../assets/icons/logout.svg'
 import { Link } from 'react-router-dom'
@@ -34,7 +35,7 @@ const AuthProfile = () => {
     // Fetching Student Info
     const {data, studentLoading, studentError} = useQuery({
       queryKey:['data', id],
-      queryFn: () => studentService(id),
+      queryFn: () => studentService.getStudentInfo(id),
       enabled: role === 'Student',
       staleTime: 60000
     })
@@ -98,16 +99,22 @@ const AuthProfile = () => {
         </Box>
       </ListItem>
       <ListItem sx={{FlexboxBetween, gap:'20px',justifyContent:'space-between'}}>
-        <LinkCostum to={'/profile/settings'}>
-          الإعدادات
-        </LinkCostum>
-        <img src={settings} alt='settings'/>
-      </ListItem>
-      <ListItem sx={{FlexboxBetween, gap:'20px',justifyContent:'space-between'}}>
         <LinkCostum to={'/profile/courses'}>
           الكورسات
         </LinkCostum>
         <img src={courses} alt='courses'/>
+      </ListItem>
+      <ListItem sx={{FlexboxBetween, gap:'20px',justifyContent:'space-between'}}>
+        <LinkCostum to={'/profile/quiz'}>
+        الإختبارات
+        </LinkCostum>
+        <img src={quiz} alt='quiz'/>
+      </ListItem>
+      <ListItem sx={{FlexboxBetween, gap:'20px',justifyContent:'space-between'}}>
+        <LinkCostum to={'/profile/settings'}>
+          الإعدادات
+        </LinkCostum>
+        <img src={settings} alt='settings'/>
       </ListItem>
 
       <hr/>

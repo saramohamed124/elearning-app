@@ -1,20 +1,19 @@
-import axios from "axios";
 import Cookies from "js-cookie";
 import { REFRESH_TOKEN, REVOKE_TOKEN } from "../api/endpoints";
 import { api } from "../api/api";
+import axios from "axios";
 
 /**
  * Stores the tokens securely in cookies.
  */
-const setToken = (token, refreshToken, tokenExpiration, id, email, role) => {
+const setToken = (token, refreshToken, tokenExpiration, id, email, role) => { // role and id and email are optional
     const expiresAt = new Date(tokenExpiration).getTime();
-
-    Cookies.set("accessToken", token, { secure: true, sameSite: "Strict" });
-    Cookies.set("refreshToken", refreshToken, { secure: true, sameSite: "Strict" });
-    Cookies.set("expiresIn", expiresAt, { secure: true, sameSite: "Strict" });
-    Cookies.set("id", id, { secure: true, sameSite: "Strict" });
-    Cookies.set("email", email, { secure: true, sameSite: "Strict" });
-    Cookies.set("role", role, { secure: true, sameSite: "Strict" });
+    Cookies.set("accessToken", token);
+    Cookies.set("refreshToken", refreshToken);
+    Cookies.set("expiresIn", expiresAt);
+    Cookies.set("id", id);
+    Cookies.set("email", email);
+    Cookies.set("role", role);
 };
 
 /**
@@ -46,17 +45,16 @@ const removeToken = () => {
  */
 const refreshToken = async () => {
     try {
-        const { refreshToken, accessToken } = getToken();
-
+        const {refreshToken, accessToken, id, role, email } = getToken();
         if (!refreshToken || !accessToken) {
             throw new Error("Token not found. Please log in again.");
         }
-
-        const res = await axios.post(REFRESH_TOKEN, { refreshToken, accessToken });
-        const { newRefreshToken, newAccessToken, tokenExpiration } = res.data;
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}${REFRESH_TOKEN}`, {  accessToken, refreshToken });
+        
+        const { token: newAccessToken, refreshToken: newRefreshToken, tokenExpiration } = res.data?.data;
 
         // Store the new tokens
-        setToken(newAccessToken, newRefreshToken, tokenExpiration);
+        setToken(newAccessToken, newRefreshToken, tokenExpiration, id, email, role);
 
         return newAccessToken; // Return new access token in case it's needed
     } catch (error) {

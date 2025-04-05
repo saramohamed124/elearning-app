@@ -138,3 +138,10 @@ export const VerfiedEmailBtn = {
     fontWeight:'bold',
     textDecoration:'none',
 }
+
+export const EditBtn = {
+    width: '40px',
+    height: '40px',
+    background: 'var(--main-color-light-blue)',
+    borderRadius: '12px',
+}

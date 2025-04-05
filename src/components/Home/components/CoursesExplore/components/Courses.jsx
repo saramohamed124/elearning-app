@@ -2,7 +2,7 @@ import React from 'react'
 
 // Utils
 import Headings from '../../../../../utils/Headings/Headings'
-import Deal from '../../../../../utils/Deal'
+import Course from '../../../../../utils/Course'
 import { Box } from '@mui/material'
 import { FlexCards } from '../../../../../styles/globalStyles'
 const Courses = () => {
@@ -10,10 +10,10 @@ const Courses = () => {
     <div>
         <Box
             sx={{...FlexCards}}>
-            <Deal />
-            <Deal />
-            <Deal />
-            <Deal />
+            <Course />
+            <Course />
+            <Course />
+            <Course />
         </Box>
     </div>
   )

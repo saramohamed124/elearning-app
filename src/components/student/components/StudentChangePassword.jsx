@@ -1,27 +1,71 @@
-import { Box, CircularProgress, Grid, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, Button, CircularProgress, Grid, Typography } from '@mui/material'
+import React, { useCallback, useState } from 'react'
 import TextStudentInput from '../common/TextStudentInput'
 import { studentService } from '../../../services/studentService';
 import { useQuery } from '@tanstack/react-query';
 import Cookies from "js-cookie";
+import { ButtonSaveChanges } from '../../../styles/StudentStyles';
+import { MAIL_REGEX, PWD_REGEX } from '../../Auth/constants/regex';
+import { api } from '../../../api/api';
+import { CHANGE_PWD } from '../../../api/endpoints';
+
+const EditableField = ({type, label, value, onChange}) => {
+    return (
+        <Grid item xs={12} sm={6}>  
+        <TextStudentInput
+            type={type}
+            label= {label}
+            value={value || ""}
+            onChange={onChange}
+            enabled={true}
+        />
+    </Grid>
+    )
+}
 
 const StudentChangePassword = () => {
         const id = Cookies.get("id");
         const role = Cookies.get("role");
-    
-        // State for edit mode
-        const [isEditing, setIsEditing] = useState(false);
-    
+        const [success, setSuccess] = useState("");
+        const [errormsg, setError] = useState(null);
+
         // Fetching Student Info
         const { data, isLoading, error } = useQuery({
             queryKey: ["student", id],
-            queryFn: () => studentService(id),
+            queryFn: () => studentService.getStudentInfo(id),
             enabled: !!id && role === "Student",
-            staleTime: 60000,
+            staleTime: 0, // Data will be considered stale immediately
+            cacheTime: 0, // Data will not be cached    
         });
     
         const student = data?.data;
     
+        // Form Data
+        const [formData, setFormData] = useState({username: student?.email || "", currentPassword: "", newPassword: ""});
+        
+    const handleChange = useCallback((e) => {
+        const { name, value } = e.target;
+            setFormData((prev) => ({ ...prev, [name]: value }));
+    },[]);
+
+    // Handle Save Changes
+    const handleSaveChanges = useCallback(async(e) => {
+        e.preventDefault();
+        setError('');
+        setSuccess('')
+
+            if(!MAIL_REGEX.test(formData.username))
+                return setError("الإيميل غير صالح")
+            if(!PWD_REGEX.test(formData.currentPassword) || !PWD_REGEX.test(formData.newPassword))
+                return setError("كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل، بما في ذلك حرف كبير وحرف صغير ورقم ورمز خاص")
+            try{
+            await api.post(CHANGE_PWD, formData);
+            setSuccess("تم حفظ التغييرات بنجاح");
+        }catch(err){
+            setError("حدث خطأ أثناء حفظ التغييرات");
+        }
+    },[formData])
+
         // Loading state
         if (isLoading) {
             return (
@@ -41,7 +85,7 @@ const StudentChangePassword = () => {
         }
     
   return (
-    <div>
+    <Box component={'form'} onSubmit={handleSaveChanges} sx={{textAlign:'right', padding:'20px'}}>
             <Box
                 sx={{
                     padding: "20px 0",
@@ -54,33 +98,33 @@ const StudentChangePassword = () => {
             >
 
                 <Grid container spacing={2} sx={{ maxWidth: "90%" }}>  
-                    <Grid item xs={12} sm={6}>  
-                        <TextStudentInput
+                        <EditableField
                             type="email"
                             label="الإيميل"
-                            value={student?.email || ""}
-                            enabled={isEditing}  // ✅ Controlled by state
+                            onChange={(e) => handleChange({target :{name:'username', value: e.target.value}})}
+                            value={formData?.username || ""}
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>  
-                        <TextStudentInput
+                        <EditableField
                             type="password"
                             label="كلمة المرور الحالية"
-                            value={student?.lastName || ""}
-                            enabled={isEditing}
+                            onChange={(e) => handleChange({target :{name: 'currentPassword', value: e.target.value}})}
+                            value={formData?.currentPassword || ""}
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>  
-                        <TextStudentInput
+                        <EditableField
                             type="password"
                             label="كلمة المرور الجديدة"
-                            value={student?.email || ""}
-                            enabled={isEditing}
+                            onChange={(e) => handleChange({target :{name:'newPassword', value: e.target.value}})}
+                            value={formData?.newPassword || ""}
                         />
-                    </Grid>
                 </Grid>
             </Box>
-    </div>
+            <Button
+            sx={{ ...ButtonSaveChanges, margin:'20px auto'}}
+            type="submit">حفظ التغييرات</Button>
+            {success && <Typography color="green" textAlign="center">{success}</Typography>}
+            {errormsg && <Typography color="red" textAlign="center">{errormsg}</Typography>}
+
+    </Box>
   )
 }
 
