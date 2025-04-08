@@ -110,7 +110,7 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
           <OutlinedInput
             placeholder='الحد الأدني'
             value={minPrice}
-            required
+            // required
             onChange={(e) => setMinPrice(e.target.value)}>
               </OutlinedInput>
       </Box>
@@ -120,7 +120,7 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
           <OutlinedInput
             placeholder='الحد الأعلي'
             value={maxPrice}
-            required
+            // required
             onChange={(e) => setMaxPrice(e.target.value)}>
               </OutlinedInput>
       </Box>

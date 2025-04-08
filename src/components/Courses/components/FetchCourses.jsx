@@ -112,7 +112,14 @@ const FetchCourses = () => {
     },
     enabled: !!searchTerm, // only run query when there's a search term
   });
-  
+  if(!searchTerm) return <p style={{ padding: '20px 25px' }}>يرجى إدخال مصطلح البحث.</p>;
+  if (courses && courses.length === 0)
+    return (
+      <p style={{ padding: '20px 25px' }}>
+        {'لا توجد دورات مطابقة لمصطلح البحث.'}
+      </p>
+    );
+    
     if (isLoading) return <p style={{ padding: '20px 25px' }}>جاري تحميل الدورات...</p>;
 
   if (error)
@@ -123,18 +130,15 @@ const FetchCourses = () => {
     );
 
   return (
-    <div>
-      <h2>الدورات المتاحة</h2>
-      {courses && courses.length > 0 ? (
+    <Box sx={{ padding: '20px 25px' }}>
+      {(courses && courses.length > 0) && (
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}
         </Box>
-      ) : (
-        <Typography variant='h6'>لا توجد دورات لعرضها في الوقت الحالي.</Typography>
       )}
-    </div>
+    </Box>
   );
 };
 

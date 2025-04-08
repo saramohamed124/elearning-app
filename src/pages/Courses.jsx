@@ -9,18 +9,20 @@ const Courses = () => {
     const navigate = useNavigate();
 
     const handleSearch = (searchParams) => {
-    const { searchTerm, level, categoryId, minPrice, maxPrice } = searchParams;
-    const query = new URLSearchParams({
-        searchTerm,
-        level,
-        categoryId,
-        minPrice,
-        maxPrice,
-    }).toString();
-    const url = `/courses?${query}`;
-    navigate(url);
-    }
+        const { searchTerm, level, categoryId, minPrice, maxPrice } = searchParams;
+      
+        const queryObj = {
+            searchTerm: searchTerm || "",
+        }
+        if(level !== '' && level !== undefined) queryObj.level = level;
+        if(categoryId !== '' && categoryId !== undefined) queryObj.categoryId = categoryId;
+        if(minPrice !== '' && minPrice !== 0 && minPrice !== undefined) queryObj.minPrice = minPrice;
+        if(maxPrice !== '' && maxPrice !== 0 && maxPrice !== undefined) queryObj.maxPrice = maxPrice;
 
+        const query = new URLSearchParams(queryObj).toString();
+        const url = `/courses?${query}`;
+        navigate(url);
+      };
     return (
         <div>
             <Header/>
