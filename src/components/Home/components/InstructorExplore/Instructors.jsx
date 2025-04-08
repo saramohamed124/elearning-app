@@ -31,6 +31,7 @@ const Instructors = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         gap: '10px',
+        width: '300px',
         padding:'15px 25px'
     }));
 

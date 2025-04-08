@@ -11,6 +11,7 @@ const ShowMore = ({linkpg}) => {
         borderRadius:'30px',
         backgroundColor:'var(--main-color-golden-yellow)',
         color:'black',
+        textWrap:'nowrap',
         fontWeight:'bold',
         textDecoration:'none'
     })) 

@@ -5,6 +5,7 @@ import { INSTRUCTOR_INFO, SEARCH_COURSES } from '../../../api/endpoints'
 import { Box, Rating, Typography, styled } from '@mui/material';
 import { OverflowHidden, PositionRelative, TextLeft, WidthFit } from '../../../styles/globalStyles';
 import course_default from '../../../assets/imgs/default_course_cover.avif'
+import SkeletonCourse from '../../../utils/Loader/SkeletonCourse';
 
 // Component for a single course card
 const CourseCard = ({ course }) => {
@@ -61,12 +62,12 @@ const CourseCard = ({ course }) => {
         }}/>
       <InfoCourse>
         <Typography variant='h6'>
-          {course?.title ? '...' + course?.title.substring(0, 16) : 'No title available'}
+          {course?.title ? '...' + course?.title.substring(0, 16) : 'لا يتوفر عنوان'}
         </Typography>
         <Typography sx={{ color: '#666666' }}>
           {instructorInfo
             ? `${instructorInfo.firstName} ${instructorInfo.lastName}`
-            : 'Instructor info not available'}
+            : 'لا يتوفر اسم المدرب'}
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box>
@@ -83,7 +84,7 @@ const CourseCard = ({ course }) => {
             />
           </Box>
           <Typography color='#ccc'>
-            {course?.price ? `${course.price}$` : 'No price'}
+            {course?.price ? `${course.price}$` : 'لا يتوفر سعر'}
           </Typography>
         </Box>
       </InfoCourse>
@@ -123,7 +124,7 @@ const FetchCourses = () => {
       </p>
     );
     
-    if (isLoading) return <p style={{ padding: '20px 25px' }}>جاري تحميل الدورات...</p>;
+    if (isLoading) return <SkeletonCourse/>;
 
   if (error)
     return (

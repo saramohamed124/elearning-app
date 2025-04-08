@@ -14,6 +14,7 @@ import styled from '@emotion/styled'
 import { api } from '../api/api';
 import { GET_COURSES, INSTRUCTOR_INFO } from '../api/endpoints';
 import { useQuery } from '@tanstack/react-query';
+import SkeletonCourse from './Loader/SkeletonCourse';
 
 const Course = () => {
     // Course Info
@@ -62,7 +63,7 @@ const Course = () => {
     // Check if coursesInfo is empty or undefined
     // and show loading text if it is
     if (!coursesInfo || coursesInfo.length === 0) {
-      return <CircularProgress/>;
+      return <SkeletonCourse/>;
     }
   
     // Get the first course from the list

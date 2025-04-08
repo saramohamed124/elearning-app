@@ -24,13 +24,13 @@ const AuthProfile = () => {
     const id = Cookies.get('id')
 
     // Fetching Instructor Info
-    const {InstructorData, instructorLoading, instructorError} = useQuery({
+    const {data: InstructorData, instructorLoading, instructorError} = useQuery({
       queryKey:['data', id],
       queryFn: () => instructorService(id),
       enabled: role === "Instructor",
       staleTime: 60000
     });
-    const instructor = InstructorData?.data;
+    const instructor = InstructorData;
 
     // Fetching Student Info
     const {data, studentLoading, studentError} = useQuery({
@@ -69,7 +69,7 @@ const AuthProfile = () => {
           src={avatar_instructor} alt='avatar instructor'/>
         <Box sx={{textAlign:'right'}}>
         <Typography variant='h6'>
-            أهلاً, {instructor?.firstName}
+            أهلاً, {instructor?.firstName} {instructor?.lastName}
         </Typography>
         <LinkCustom to={'/instructor-profile'}>عرض الملف الشخصي</LinkCustom>
         </Box>

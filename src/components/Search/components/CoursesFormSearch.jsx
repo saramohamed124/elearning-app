@@ -18,7 +18,11 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
     const [categoryId, setCategoryId] = useState('') // it not read why
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('');
+    // const [error, setError] = useState('')
     const { data: categories, isLoading } = useCategories();
+    const location = window.location.search;
+    const params = new URLSearchParams(location);
+    const searchTerm = params.get('searchTerm');
 
     // handle filter Level
     const levels = [
@@ -40,7 +44,9 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
       // Handle Search
       const handleSearch = (e) => {
         e.preventDefault();
-
+        // if(!searchTerm) {
+        //   setError('يرجى إدخال كلمة البحث')
+        // }
         const data = {
           ...(categoryId !== '' && { categoryId }),
           ...(level !== '' && { level }),
@@ -49,7 +55,10 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
         };
       
         setSubmitData(data);
+        // setTimeout(() => {
         handleClose();
+        // }
+        // , 3000)
       };
 
       return (
@@ -125,6 +134,7 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
               </OutlinedInput>
       </Box>
         </Box>
+        {/* {error && <p style={{ color: 'var(--main-color-error)', textAlign: 'center', marginTop: '10px' }}>{error}</p>} */}
         <Button
         type="submit"
         sx={{
