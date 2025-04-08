@@ -62,7 +62,7 @@ const CourseCard = ({ course }) => {
         }}/>
       <InfoCourse>
         <Typography variant='h6'>
-          {course?.title ? '...' + course?.title.substring(0, 16) : 'لا يتوفر عنوان'}
+          {course?.title ? '...' + course?.title.substring(0, 26) : 'لا يتوفر عنوان'}
         </Typography>
         <Typography sx={{ color: '#666666' }}>
           {instructorInfo

@@ -71,7 +71,7 @@ const AuthProfile = () => {
         <Typography variant='h6'>
             أهلاً, {instructor?.firstName} {instructor?.lastName}
         </Typography>
-        <LinkCustom to={'/instructor-profile'}>عرض الملف الشخصي</LinkCustom>
+        <LinkCustom to={'/instructor-dashboard'}>عرض الملف الشخصي</LinkCustom>
         </Box>
       </ListItem>
       <hr/>

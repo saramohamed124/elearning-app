@@ -18,6 +18,7 @@ const RegisterInstructor = React.lazy(() => import('./components/Auth/RegisterIn
 const ResetPass = React.lazy(() => import('./components/Auth/ResetPass')) ;
 const VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
 const ResendVerfiedEmail = React.lazy(() => import('./components/Auth/ResendVerfiedEmail'));
+const InstructorDashboard = React.lazy(() => import('./components/instructor/InstructorDashboard'))
 
 const ROLES = {
   INSTRUCTOR: "Instructor",
@@ -26,7 +27,7 @@ const ROLES = {
 
 function App() {
   const location = useLocation();
-  const hideLayoutRoutes = ['/verify-email', '/resend-email','/instructor-profile'];
+  const hideLayoutRoutes = ['/verify-email', '/resend-email','/instructor-dashboard'];
   const authRoutes = ['/login', '/register-student', '/register-instructor', '/forget-password'];
 
   // Logic to determine visibility of Navbar and Footer
@@ -53,6 +54,10 @@ function App() {
         <Route element={<ProtectedRoutes allowedRoles={[ROLES.STUDENT]}/>}>
           <Route path='/profile' element={<UserProfle/>}/>
           <Route path='/profile/settings' element={<UserProfileSettings/>}/>
+        </Route>
+        <Route element={<ProtectedRoutes allowedRoles={[ROLES.INSTRUCTOR]}/>}>
+          <Route path='/instructor-dashboard' element={<InstructorDashboard/>}/>
+          <Route/>
         </Route>
       </Routes>
       {showFooter &&(<>
