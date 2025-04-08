@@ -17,6 +17,7 @@ const Home = () => {
       </div>
       <CategoryExplore/>
       <div className='container-custom'>
+        <Headings>تعرف علي مدربينا</Headings>
       <InstructorExplore/>
       </div>
       </div>

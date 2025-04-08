@@ -1,22 +1,32 @@
-import React from 'react'
+import React from 'react';
+import { Box, Typography } from '@mui/material';
+import { getToken } from '../../../../../services/authServices'; // Assuming this checks if the user is logged in
+import Course from '../../../../../utils/Course'; // Your Course component
+import { FlexCards } from '../../../../../styles/globalStyles'; // Your Flex styling
 
-// Utils
-import Headings from '../../../../../utils/Headings/Headings'
-import Course from '../../../../../utils/Course'
-import { Box } from '@mui/material'
-import { FlexCards } from '../../../../../styles/globalStyles'
 const Courses = () => {
+  const { accessToken } = getToken(); // Check if the user is logged in
+
+  if(!accessToken) {
+    return (
+      <Box sx={{ textAlign: 'center', padding: '20px' }}>
+        <Typography variant="h6" color="textSecondary">
+        أنت بحاجة لتسجيل الدخول لرؤية الدورات.
+        </Typography>
+      </Box>
+    )
+  }
+
   return (
     <div>
-        <Box
-            sx={{...FlexCards}}>
-            <Course />
-            <Course />
-            <Course />
-            <Course />
-        </Box>
+      <Box sx={{ ...FlexCards }}>
+        <Course />
+        <Course />
+        <Course />
+        <Course />
+      </Box>
     </div>
-  )
-}
+  );
+};
 
-export default Courses
+export default Courses;

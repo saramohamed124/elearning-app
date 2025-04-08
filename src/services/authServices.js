@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import { REFRESH_TOKEN, REVOKE_TOKEN } from "../api/endpoints";
 import { api } from "../api/api";
 import axios from "axios";
+import { SuccessMsgToast } from "../components/Auth/utils/toasts";
 
 /**
  * Stores the tokens securely in cookies.
@@ -70,6 +71,8 @@ const refreshToken = async () => {
 const logout = async (email) => {
     try {
         await api.post(REVOKE_TOKEN, { username: email });
+        SuccessMsgToast('انتهت جلستك. الرجاء تسجيل الدخول مرة أخرى.');
+        window.location.href = "/login"; // Redirect to login page after logout
     } catch (error) {
         console.error("Logout failed:", error?.response?.data?.message || error.message);
     } finally {

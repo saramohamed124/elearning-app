@@ -6,7 +6,7 @@ import { PositionRelative, WidthFit, OverflowHidden, TextLeft,  } from '../style
 import course_default from '../assets/imgs/default_course_cover.avif'
 
 // MUI
-import { Box, Grid2, Rating, Typography } from '@mui/material'
+import { Box, CircularProgress, Grid2, Rating, Typography } from '@mui/material'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 
 
@@ -62,7 +62,7 @@ const Course = () => {
     // Check if coursesInfo is empty or undefined
     // and show loading text if it is
     if (!coursesInfo || coursesInfo.length === 0) {
-      return <Typography>Loading...</Typography>;
+      return <CircularProgress/>;
     }
   
     // Get the first course from the list

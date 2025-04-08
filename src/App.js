@@ -7,9 +7,11 @@ import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Home/components/Footer/Footer';
 import CopyRight from './components/Home/components/CopyRight';
 import ProtectedRoutes from './routes/ProtectedRoutes';
+import RequiredAuth from './hooks/RequiredAuth';
 const UserProfle = React.lazy(() => import('./pages/UserProfle'));
 const UserProfileSettings = React.lazy(() => import('./pages/UserProfileSettings'));
 const Home = React.lazy(() => import('./pages/Home')) ;
+const Courses = React.lazy(() => import('./pages/Courses')) ;
 const Login = React.lazy(() => import('./components/Auth/Login')) ;
 const RegisterStudent = React.lazy(() => import('./components/Auth/RegisterStudent')) ;
 const RegisterInstructor = React.lazy(() => import('./components/Auth/RegisterInstructor')) ;
@@ -36,6 +38,9 @@ function App() {
       {showNavbar && <Navbar/>}
       <Routes>
         <Route path="/" element={<Home/>}/>
+        {/* Private Routes */}
+        <Route path='/courses' element={<RequiredAuth><Courses/></RequiredAuth>}/>
+        {/* Private Routes */}
         <Route path="/login" element={<Login/>}/>
         <Route path="/register-student" element={<RegisterStudent/>}/>
         <Route path="/register-instructor" element={<RegisterInstructor/>}/>
