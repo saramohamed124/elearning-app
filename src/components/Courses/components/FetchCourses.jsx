@@ -55,7 +55,10 @@ const CourseCard = ({ course }) => {
         src={course?.thumbnailUrl || course_default}
         alt='Course'
         style={{ maxWidth: '100%' }}
-      />
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = course_default;
+        }}/>
       <InfoCourse>
         <Typography variant='h6'>
           {course?.title ? '...' + course?.title.substring(0, 16) : 'No title available'}

@@ -100,7 +100,14 @@ const Course = () => {
     <Box  sx={{...PositionRelative, ...WidthFit, width:'300px', ...OverflowHidden,minHeight:'220px',
       boxShadow: '1px -1px 23px 1px #E1E1E1',
     }}>
-      <img src={course?.thumbnailUrl ? course.thumbnailUrl : course_default} alt='Course logo' style={{maxWidth:'100%'}}/>
+      <img
+        src={course?.thumbnailUrl || course_default}
+        alt='Course logo'
+        style={{maxWidth:'100%'}}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = course_default;
+        }}/>
       <InfoCourse>
         <Typography variant='h6'>
         {course?.title ? '...' + course?.title.substring(0, 16)  : "No title available"}
