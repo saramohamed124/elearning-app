@@ -100,9 +100,9 @@ const FetchCourses = () => {
     queryKey: ['courses', searchTerm, level, categoryId, minPrice, maxPrice], // good for cache
     queryFn: async () => {
       const params = {
-        searchTerm, // always required
-        ...(level !== '' && { level }),             // if not empty string
-        ...(categoryId !== '' && { categoryId }),   // if not empty string
+        searchTerm,
+        ...(level !== '' && { level }),
+        ...(categoryId !== '' && { categoryId }),
         ...(minPrice !== '' && minPrice !== 0 && { minPrice }),
         ...(maxPrice !== '' && maxPrice !== 0 && { maxPrice }),
       };

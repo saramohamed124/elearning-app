@@ -1,5 +1,5 @@
 import { Avatar, Box, MenuItem, OutlinedInput, Select, Typography, Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -143,7 +143,19 @@ const CoursesFormSearch = ({ onSearch }) => {
     const [open, setOpen] = useState(false);
     const [submitData, setSubmitData] = useState({});
     const anchorRef = React.useRef(null);
-  
+
+   
+    useEffect(() => {
+      const location = window.location.search;
+      const params = new URLSearchParams(location);
+      const searchTerm = params.get('searchTerm');
+        if(searchTerm && Object.keys(submitData).length > 0) {
+        onSearch({
+          searchTerm,
+          ...submitData,
+        })
+      }
+    })
     const handleToggle = () => {
       setOpen((prevOpen) => !prevOpen);
     };
