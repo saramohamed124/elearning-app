@@ -104,7 +104,7 @@ const FetchCourses = () => {
     queryKey: ['courses', searchTerm, level, categoryId, minPrice, maxPrice], // good for cache
     queryFn: async () => {
       const params = {
-        searchTerm,
+        searchTerm ,
         ...(level !== '' && { level }),
         ...(categoryId !== '' && { categoryId }),
         ...(minPrice !== '' && minPrice !== 0 && { minPrice }),
@@ -116,10 +116,16 @@ const FetchCourses = () => {
     },
     enabled: !!searchTerm, // only run query when there's a search term
   });
-  if(!searchTerm) return <p style={{ padding: '20px 25px' }}>يرجى إدخال مصطلح البحث.</p>;
-  if (courses && courses.length === 0)
+  if (!searchTerm) {
     return (
-      <p style={{ padding: '20px 25px' }}>
+      <p style={{ padding: '20px 25px', fontSize: '20px', color: '#555', textAlign: 'center' }}>
+        الرجاء إدخال اسم الكورس للبدء في عملية البحث.
+      </p>
+    );
+  }
+    if (courses && courses.length === 0)
+    return (
+      <p style={{ padding: '20px 25px', fontSize: '20px', color: '#555', textAlign: 'center' }}>
         {'لا توجد دورات مطابقة لمصطلح البحث.'}
       </p>
     );
