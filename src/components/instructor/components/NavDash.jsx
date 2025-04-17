@@ -52,7 +52,7 @@ const NavDash = () => {
     queryKey: ['data', id],
     queryFn: () => instructorService(id),
     enabled: role === 'Instructor',
-    staleTime: 60000,
+    staleTime: 0,
   });
 
   const instructor = InstructorData;

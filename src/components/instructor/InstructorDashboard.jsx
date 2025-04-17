@@ -3,21 +3,23 @@ import NavDash from './components/NavDash'
 import SideBar from './components/SideBar'
 import { Box } from '@mui/material'
 import { Flexbox } from '../../styles/globalStyles';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const InstructorDashboard = () => {
+  const location = useLocation()
+  const profile = location.pathname.includes('/instructor-dashboard/profile');
   return (
     <div>
       <NavDash/>
       <Box sx={{ ...Flexbox }}>
       <SideBar/>
       <div
-        className='container-custom'
+        className={!profile ? 'container-custom' : ''}
         style={{
-          width: '80%',
+          width: '100%',
           overflowY: 'scroll',
           maxHeight: '100vh',
-          padding:'20px'}}>
+          padding: !profile ? '20px' : '0px'}}>
         <Outlet/>
       </div>
       </Box>

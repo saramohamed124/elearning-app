@@ -33,7 +33,7 @@ const FetchCourses = () => {
     },
     enabled: !!searchTerm, // only run query when there's a search term
   });
-    const { data: coursesCategory, isLoading: isLoadingcoursesCategory, erroro: errorcoursesCategory } = useQuery({
+    const { data: coursesCategory, isLoading: isLoadingcoursesCategory, error: errorcoursesCategory } = useQuery({
       queryKey: ['courses', categoryId], // good for cache
       queryFn: async () => {
 
@@ -70,7 +70,7 @@ const FetchCourses = () => {
   return (
     <Box sx={{ padding: '20px 25px' }}>
       {(courses && courses.length > 0) && (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent:{xs:'center',md:'flex-start'}, gap: '20px' }}>
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}

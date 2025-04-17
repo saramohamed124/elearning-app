@@ -6,6 +6,7 @@ import InstructorCourses from '../DashboardHome/components/InstructorCourses'
 import { Box } from '@mui/material'
 import { FlexboxBetween } from '../../../styles/globalStyles'
 import { Link } from 'react-router-dom'
+import ShowMore from '../../../utils/Btns/ShowMore'
 
 const InstructorHome = () => {
   return (
@@ -32,6 +33,7 @@ const InstructorHome = () => {
         }}>إضافة كورس</Link>
       </Box>
       <InstructorCourses/>
+        <ShowMore linkpg={'/instructor-dashboard/courses'}/>
     </div>
   )
 }

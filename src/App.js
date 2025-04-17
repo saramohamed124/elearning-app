@@ -20,7 +20,7 @@ const VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
 const ResendVerfiedEmail = React.lazy(() => import('./components/Auth/ResendVerfiedEmail'));
 const InstructorDashboard = React.lazy(() => import('./components/instructor/InstructorDashboard'))
 const InstructorHome = React.lazy(() => import('./components/instructor/Pages/InstructorHome'))
-
+const InstructorProfileInstructor = React.lazy(() => import('./components/instructor/Pages/InstructorProfileInstructor'));
 const ROLES = {
   INSTRUCTOR: "Instructor",
   STUDENT: "Student"
@@ -32,8 +32,8 @@ function App() {
   const authRoutes = ['/login', '/register-student', '/register-instructor', '/forget-password'];
 
   // Logic to determine visibility of Navbar and Footer
-  const showNavbar = !hideLayoutRoutes.includes(location.pathname);
-  const showFooter = ![...hideLayoutRoutes, ...authRoutes].includes(location.pathname) 
+  const showNavbar = !hideLayoutRoutes.some(path => location.pathname.startsWith(path));
+  const showFooter = ![...hideLayoutRoutes, ...authRoutes].some(path => location.pathname.startsWith(path)); 
    return (
     <div className="App">
       <Suspense fallback={<Loader/>}>
@@ -59,6 +59,7 @@ function App() {
         <Route element={<ProtectedRoutes allowedRoles={[ROLES.INSTRUCTOR]}/>}>
           <Route path='/instructor-dashboard' element={<InstructorDashboard/>}>
             <Route index element={<InstructorHome/>}/> 
+            <Route path='profile' element={<InstructorProfileInstructor/>}/>
           </Route>
           <Route/>
         </Route>
