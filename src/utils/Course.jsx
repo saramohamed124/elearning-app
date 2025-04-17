@@ -1,7 +1,6 @@
 import React from 'react'
 
 // MUI
-import { Box } from '@mui/material'
 import { api } from '../api/api';
 import { GET_COURSES } from '../api/endpoints';
 import { useQuery } from '@tanstack/react-query';

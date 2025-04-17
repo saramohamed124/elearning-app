@@ -16,6 +16,8 @@ const useCategoryId = (categoryId) => {
         throw error; // ✅ throw instead of return
       }
     },
+    staleTime:0,
+    enabled: !!categoryId,
   });
 }
 

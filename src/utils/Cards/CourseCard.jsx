@@ -22,7 +22,6 @@ const CourseCard = ({course}) => {
         backgroundColor: 'white',
         transform: 'translateX(-50%)',
       }));
-      const { data: category } = useCategoryId(course.categoryId);
       
         const { data: ratingCourse } = useQuery({
           queryKey: ['ratingCourse', course?.id],  // Unique key per course
@@ -33,6 +32,7 @@ const CourseCard = ({course}) => {
           },
           staleTime: 0,
         });
+        const { data: category } = useCategoryId(course?.categoryId);
 
         const { data: instructorInfo } = useFetchInstructorId(course?.instructorId);
 
@@ -43,7 +43,7 @@ const CourseCard = ({course}) => {
         ...WidthFit,
         width: '300px',
         ...OverflowHidden,
-        minHeight: '220px',
+        minHeight: {xs: '280px', sm: '220px'},
         boxShadow: '1px -1px 23px 1px #E1E1E1',
       }}
     >
