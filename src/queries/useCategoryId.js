@@ -1,16 +1,15 @@
-// useCategories.js
-import { useQuery } from '@tanstack/react-query';
-import { api } from '../../api/api';
-import { GET_CATEGORIES } from '../../api/endpoints';
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../api/api";
+import { GET_CATEGORIES } from "../api/endpoints";
 
 const CATEGORIES_QUERY_KEY = ['categories'];
 
-export const useCategories = () => {
+const useCategoryId = (categoryId) => {
   return useQuery({
     queryKey: CATEGORIES_QUERY_KEY,
     queryFn: async () => {
       try {
-        const res = await api.get(GET_CATEGORIES);        
+        const res = await api.get(`${GET_CATEGORIES}/${categoryId}`);        
         return res.data.data;
       } catch (error) {
         // console.error('Error fetching categories:', error);
@@ -18,4 +17,6 @@ export const useCategories = () => {
       }
     },
   });
-};
+}
+
+export default useCategoryId

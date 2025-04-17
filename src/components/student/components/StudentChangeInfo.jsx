@@ -12,7 +12,7 @@ import { MAIL_REGEX, NAME_REGEX } from "../../Auth/constants/regex";
 
 const EditableField = ({ label, value, isEditing, onEditToggle, onChange }) => (
     <Grid item xs={12} sm={6} sx={{ display: "flex", alignItems: "end", justifyContent:'center', gap: 1 }}>
-        <TextStudentInput type="text" name={label} label={label} value={value} enabled={isEditing} onChange={onChange} />
+        <TextStudentInput type="text" name={label} label={label} value={value} enabled={label.email !== 'student@gmail.com' ? isEditing : false} onChange={onChange} />
         <IconButton sx={EditBtn} onClick={onEditToggle} aria-label={`Edit ${label}`}>
             <img src={editIcon} alt="Edit" width={24} />
         </IconButton>
@@ -130,7 +130,7 @@ const StudentChangeInfo = () => {
                 <EditableField
                     label="الإيميل"
                     value={formData.email || ""}
-                    isEditing={isEditing.email}
+                    isEditing={isEditing.email && formData.email !== 'student@gmail.com'}
                     onEditToggle={() => toggleEditMode("email")}
                     onChange={(e) => handleChange({target: { name: "email", value: e.target.value}})} // Pass the change handler
                 />
@@ -139,7 +139,8 @@ const StudentChangeInfo = () => {
             <Button
             sx={{ ...ButtonSaveChanges, margin:'20px auto'}}
             type="submit">حفظ التغييرات</Button>
-            {success && <Typography color="green" textAlign="center">{success}</Typography>}
+                {formData.email === 'student@gmail.com' && (<Typography color="red" textAlign="center" sx={{fontSize:'12px', marginTop:'10px'}}> هذا الإيميل للتجربة لا يمكن تعديله</Typography>)}
+                {success && <Typography color="green" textAlign="center">{success}</Typography>}
             {errormsg && <Typography color="red" textAlign="center">{errormsg}</Typography>}
         </Box>
     );

@@ -9,7 +9,7 @@ import { MAIL_REGEX, PWD_REGEX } from '../../Auth/constants/regex';
 import { api } from '../../../api/api';
 import { CHANGE_PWD } from '../../../api/endpoints';
 
-const EditableField = ({type, label, value, onChange}) => {
+const EditableField = ({type, label, value, onChange, isDisabled}) => {
     return (
         <Grid item xs={12} sm={6}>  
         <TextStudentInput
@@ -17,7 +17,7 @@ const EditableField = ({type, label, value, onChange}) => {
             label= {label}
             value={value || ""}
             onChange={onChange}
-            enabled={true}
+            enabled={!isDisabled}
         />
     </Grid>
     )
@@ -102,8 +102,9 @@ const StudentChangePassword = () => {
                             type="email"
                             label="الإيميل"
                             onChange={(e) => handleChange({target :{name:'username', value: e.target.value}})}
-                            value={formData?.username || ""}
-                        />
+                            value={formData?.username || student?.email || ""} 
+                            isDisabled={student?.email === 'student@gmail.com'}
+                            />
                         <EditableField
                             type="password"
                             label="كلمة المرور الحالية"
@@ -121,6 +122,7 @@ const StudentChangePassword = () => {
             <Button
             sx={{ ...ButtonSaveChanges, margin:'20px auto'}}
             type="submit">حفظ التغييرات</Button>
+                {student?.email === 'student@gmail.com' && (<Typography color="red" textAlign="center" sx={{fontSize:'12px', marginTop:'10px'}}> لا يمكن تعديل كلمة المرور لهذا الايميل</Typography>)}
             {success && <Typography color="green" textAlign="center">{success}</Typography>}
             {errormsg && <Typography color="red" textAlign="center">{errormsg}</Typography>}
 

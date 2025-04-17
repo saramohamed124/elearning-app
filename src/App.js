@@ -19,6 +19,7 @@ const ResetPass = React.lazy(() => import('./components/Auth/ResetPass')) ;
 const VerfiedEmail = React.lazy(() => import('./components/Auth/VerfiedEmail'));
 const ResendVerfiedEmail = React.lazy(() => import('./components/Auth/ResendVerfiedEmail'));
 const InstructorDashboard = React.lazy(() => import('./components/instructor/InstructorDashboard'))
+const InstructorHome = React.lazy(() => import('./components/instructor/Pages/InstructorHome'))
 
 const ROLES = {
   INSTRUCTOR: "Instructor",
@@ -56,7 +57,9 @@ function App() {
           <Route path='/profile/settings' element={<UserProfileSettings/>}/>
         </Route>
         <Route element={<ProtectedRoutes allowedRoles={[ROLES.INSTRUCTOR]}/>}>
-          <Route path='/instructor-dashboard' element={<InstructorDashboard/>}/>
+          <Route path='/instructor-dashboard' element={<InstructorDashboard/>}>
+            <Route index element={<InstructorHome/>}/> 
+          </Route>
           <Route/>
         </Route>
       </Routes>

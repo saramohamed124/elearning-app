@@ -21,9 +21,6 @@ const Courses = () => {
     <div>
       <Box sx={{ ...FlexCards }}>
         <Course />
-        <Course />
-        <Course />
-        <Course />
       </Box>
     </div>
   );

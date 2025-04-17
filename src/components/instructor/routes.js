@@ -12,7 +12,7 @@ import logout from './assets/logout.svg';
 export const routes = [
   {
     title: 'لوحة التحكم',
-    path: '/dashboard',
+    path: '/instructor-dashboard',
     icon: dashhome,
   },
   {

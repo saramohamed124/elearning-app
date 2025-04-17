@@ -2,11 +2,11 @@ import styled from '@emotion/styled'
 import { Typography } from '@mui/material'
 import React from 'react'
 
-const Headings = ({children,valueColor}) => {
+const Headings = ({children,valueColor, fontSizepx}) => {
     const Heading = styled(Typography)(({theme})=>({
         position:'relative',
         color : valueColor,
-        fontSize:'25px',
+        fontSize:fontSizepx || '25px',
         padding:'5px',
         fontWeight:'bold',
         width:'fit-content',

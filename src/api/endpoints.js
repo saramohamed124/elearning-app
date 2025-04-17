@@ -10,6 +10,7 @@ export const  REVOKE_TOKEN = 'Auth/revoke-token'
 
 // Instructors
 export const INSTRUCTOR_INFO = 'Instructors'
+export const INSTRUCTOR_COURSES ='Course/instructor'
 
 // Students
 export const STUDENT_INFO = 'Students'
@@ -17,6 +18,7 @@ export const STUDENT_INFO = 'Students'
 // Courses
 export const GET_COURSES = 'Course/search'
 export const SEARCH_COURSES = 'Search/courses'
+export const COURSES_BY_ID = 'Course/category'
 
 // Categories
 export const GET_CATEGORIES = 'Category'
