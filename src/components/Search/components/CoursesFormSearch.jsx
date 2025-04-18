@@ -14,12 +14,12 @@ import { FlexboxCenter } from '../../../styles/globalStyles';
 
 // Filter Menu
 const FilterMenu = ({open, handleClose, setSubmitData}) => {
-    const [level, setLevel] = useState('')
+  const { data: categories, isLoading } = useCategories() || [];
+  const [level, setLevel] = useState('')
     const [categoryId, setCategoryId] = useState('') // it not read why
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('');
     // const [error, setError] = useState('')
-    const { data: categories, isLoading } = useCategories();
     const location = window.location.search;
     const params = new URLSearchParams(location);
     const searchTerm = params.get('searchTerm');
@@ -32,8 +32,9 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
         { value: 3, label: 'خبير' },
         { value: 4, label: 'محترف' }
       ];
-    
-      if (isLoading) {
+      console.log(categories);
+      
+      if (categories.length < 0 || isLoading) {
         return (
           <Box sx={{ padding: '10px' }}>
             جاري تحميل ...
@@ -85,7 +86,7 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
           {categories ?
           categories.map((category) => (
             <MenuItem key={category.id} value={category.id}>
-              {category.name}
+              {category?.name}
             </MenuItem>
           )):
           <Box sx={{ padding: '10px', color: 'var(--main-color-error)' }}>

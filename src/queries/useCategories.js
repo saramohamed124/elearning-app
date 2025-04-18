@@ -11,11 +11,12 @@ export const useCategories = () => {
     queryFn: async () => {
       try {
         const res = await api.get(GET_CATEGORIES);        
-        return res.data.data;
+        return res?.data.data;
       } catch (error) {
         // console.error('Error fetching categories:', error);
         throw error; // ✅ throw instead of return
       }
     },
+    staleTime:0,
   });
 };

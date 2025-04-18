@@ -5,6 +5,7 @@ import { FlexboxBetween } from '../../../styles/globalStyles'
 import { Link } from 'react-router-dom'
 import Headings from '../../../utils/Headings/Headings'
 import InstructorCourses from '../DashboardHome/components/InstructorCourses'
+import ShowMore from '../../../utils/Btns/ShowMore'
 
 const InstructorProfileInstructor = () => {
     const BackgroundBox = styled(Box)({
@@ -36,7 +37,7 @@ const InstructorProfileInstructor = () => {
                 }}>إضافة كورس</Link>
               </Box>
               <InstructorCourses/>
-                
+              <ShowMore linkpg={'/instructor-dashboard/courses'}/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Avatar, Box, styled, Typography } from '@mui/material'
+import { Avatar, Box, CircularProgress, styled, Typography } from '@mui/material'
 import Cookies from 'js-cookie'
 
 // img
@@ -8,8 +8,11 @@ import { FlexboxCenter } from '../../../../styles/globalStyles';
 
 const InstructorInfo = () => {
     const instructorId = Cookies.get('id');
-    const { data: instructorInfo } = useFetchInstructorId(instructorId);
+    const { data: instructorInfo, isLoading } = useFetchInstructorId(instructorId);
 
+    if(isLoading) {
+        return <CircularProgress/>
+    }
     // Styles
     const ExpertCustom = styled(Box)({
         width:'fit-content',

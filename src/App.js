@@ -21,6 +21,8 @@ const ResendVerfiedEmail = React.lazy(() => import('./components/Auth/ResendVerf
 const InstructorDashboard = React.lazy(() => import('./components/instructor/InstructorDashboard'))
 const InstructorHome = React.lazy(() => import('./components/instructor/Pages/InstructorHome'))
 const InstructorProfileInstructor = React.lazy(() => import('./components/instructor/Pages/InstructorProfileInstructor'));
+const InstructorCategories = React.lazy(() => import('./components/instructor/Pages/InstructorCategories'));
+
 const ROLES = {
   INSTRUCTOR: "Instructor",
   STUDENT: "Student"
@@ -60,6 +62,7 @@ function App() {
           <Route path='/instructor-dashboard' element={<InstructorDashboard/>}>
             <Route index element={<InstructorHome/>}/> 
             <Route path='profile' element={<InstructorProfileInstructor/>}/>
+            <Route path='categories' element={<InstructorCategories/>}/>
           </Route>
           <Route/>
         </Route>
