@@ -16,9 +16,9 @@ const CategoryCards = () => {
           );      
     }
   return (
-    <Box sx={{...FlexboxWrap, gap:'20px'}}>
+    <Box sx={{...FlexboxWrap, gap:'40px'}}>
       {data.map(category => (
-        <CategoryCard key={category.categoryId} categoryName={category?.name} categoryId={category.categoryId} courseCount={category?.courseCount}/>
+        <CategoryCard key={category.id} categoryName={category?.name} categoryId={category.id} courseCount={category?.courseCount}/>
       ))}
     </Box>
   )

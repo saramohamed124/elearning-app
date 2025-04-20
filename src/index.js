@@ -19,6 +19,18 @@ const theme = createTheme({
       xl: 1536,
     },
   },
+  palette: {
+    mainDarkMidnightBlue: '#023047',
+    mainColorDarkTeal: '#126782',
+    mainColorDarkTealHover: '#105d75',
+    mainColorCyanBlue: '#219ebc',
+    mainColorLightBlue: '#8ecae6',
+    mainColorGoldenYellow: '#ffb703',
+    mainColorOrangeGold: '#fd9e02',
+    mainColorVibrantOrange: '#fb8500',
+    mainColorSuccess: '#1AD526',
+    mainColorError: '#d32f2f',
+  }
 })
 
 // React Query
