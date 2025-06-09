@@ -5,9 +5,9 @@ import { GET_CATEGORIES } from '../api/endpoints';
 
 const CATEGORIES_QUERY_KEY = ['categories'];
 
-export const useCategories = () => {
+const useCategories = () => {
   return useQuery({
-    queryKey: CATEGORIES_QUERY_KEY,
+    queryKey: ['categories'],
     queryFn: async () => {
       try {
         const res = await api.get(GET_CATEGORIES);        
@@ -20,3 +20,4 @@ export const useCategories = () => {
     staleTime:0,
   });
 };
+export default useCategories;

@@ -7,22 +7,24 @@ import { Card, CircularProgress, Box, Typography } from '@mui/material'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '../../../../api/api'
 import { INSTRUCTOR_INFO } from '../../../../api/endpoints'
+import ErrorMsg from '../../../../utils/Error/ErrorMsg'
 
 const Instructors = () => {
     // Fetching Instructor Info
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { data: instructorData, isLoading: instructorLoading} = useQuery({
+    const { data: instructorData, isLoading: instructorLoading, isError} = useQuery({
         queryKey:['instructorData'],
         queryFn: async () => {
             try{
                 const res = await api.get(INSTRUCTOR_INFO);
                 return res.data;
             }catch(err) {
-                return <p style={{color:'var(--main-color-error)'}}>فشل تحميل البيانات</p>
+                return
             }
         }
     })
-
+    if(isError) return <ErrorMsg err={'فشل تحميل المدربين'}/>
+    
     const someInstructors = instructorData?.data?.slice(0,3);
     // Styles
     const CardInstructor = styled(Card)(({theme})=>({

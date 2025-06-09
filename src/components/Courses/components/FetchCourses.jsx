@@ -11,7 +11,7 @@ import CourseCard from '../../../utils/Cards/CourseCard';
 const FetchCourses = () => {
   const location = window.location.search;
   const params = new URLSearchParams(location);
-  const searchTerm = params.get('searchTerm');
+  const searchTerm = params.get('searchTerm') || '';
   const level = params.get('level') || '';
   const categoryId = params.get('categoryId') || '';
   const minPrice = params.get('minPrice') || '';
@@ -22,17 +22,17 @@ const FetchCourses = () => {
     queryFn: async () => {
       const params = {
         searchTerm ,
-        ...(level !== '' && { level }),
-        ...(categoryId !== '' && { categoryId }),
-        ...(minPrice !== '' && minPrice !== 0 && { minPrice }),
-        ...(maxPrice !== '' && maxPrice !== 0 && { maxPrice }),
+        level,
+        categoryId,
+        minPrice,
+        maxPrice,
       };
   
       const res = await api.get(SEARCH_COURSES, { params });
       return res.data.data;
     },
-    enabled: !!searchTerm, // only run query when there's a search term
   });
+  
     const { data: coursesCategory, isLoading: isLoadingcoursesCategory, error: errorcoursesCategory } = useQuery({
       queryKey: ['courses', categoryId], // good for cache
       queryFn: async () => {
@@ -43,13 +43,7 @@ const FetchCourses = () => {
       enabled: !!categoryId,
     });
   
-  if (!searchTerm && !categoryId) {
-    return (
-      <p style={{ padding: '40px 25px', fontSize: '20px', color: '#555', textAlign: 'center' }}>
-        الرجاء إدخال اسم الكورس للبدء في عملية البحث.
-      </p>
-    );
-  }
+
     if ((courses && courses.length === 0 )|| (coursesCategory && coursesCategory.length === 0)) 
     return (
       <p style={{ padding: '40px 25px', fontSize: '20px', color: '#555', textAlign: 'center' }}>
@@ -63,14 +57,14 @@ const FetchCourses = () => {
   if (error || errorcoursesCategory)
     return (
       <p style={{ padding: '20px 25px', color: 'var(--main-color-error)' }}>
-        {'حدث خطأ ما'}
+        {'فشل تحميل الدورات'}
       </p>
     );
 
   return (
     <Box sx={{ padding: '20px 25px' }}>
       {(courses && courses.length > 0) && (
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent:{xs:'center',md:'flex-start'}, gap: '20px' }}>
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent:'center', gap: '20px' }}>
           {courses.map((course) => (
             <CourseCard key={course.id} course={course} />
           ))}

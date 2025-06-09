@@ -23,6 +23,7 @@ api.interceptors.request.use(
         } else {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
+        config.headers.Accept = '*/*';
         return config;
     },
     (err) => Promise.reject(err),
