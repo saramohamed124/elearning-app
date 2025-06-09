@@ -9,7 +9,7 @@ import Stack from '@mui/material/Stack';
 // icons
 import search from '../assets/search.svg';
 import filter from '../assets/filter.svg'
-import { useCategories } from '../../../queries/useCategories';
+import useCategories from '../../../queries/useCategories';
 import { FlexboxCenter } from '../../../styles/globalStyles';
 
 // Filter Menu

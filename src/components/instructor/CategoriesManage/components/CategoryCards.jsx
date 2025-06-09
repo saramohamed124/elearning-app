@@ -1,5 +1,5 @@
 import React from 'react'
-import { useCategories } from '../../../../queries/useCategories'
+import  useCategories  from '../../../../queries/useCategories'
 import CategoryCard from '../common/CategoryCard';
 import { Box, CircularProgress } from '@mui/material';
 import { FlexboxWrap } from '../../../../styles/globalStyles';
