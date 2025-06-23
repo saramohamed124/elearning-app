@@ -1,9 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '../routes';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import { getToken, logout } from '../../../services/authServices';
+
+// icons
+import logout_icon from '../assets/logout.svg';
 
 const SideBar = () => {
+  const { email } = getToken();
+
   return (
     <Box sx={{
             display: "flex",
@@ -34,6 +39,33 @@ const SideBar = () => {
           }}}>{title}</Typography>
         </Link>
       ))}
+      <hr style={{
+        display: 'block',
+        width: '100%',
+        height:'3px',
+        background: 'black',
+        borderRadius: '50px',
+      }}/>
+        <Button
+          onClick={() => {
+            logout(email)
+          }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            textWrap: 'nowrap',
+            gap: '10px',
+            color: 'black',
+            textDecoration: 'none',
+          }}
+        >
+          <img src={logout_icon} alt={'logout'} width={24} height={24} />
+          <Typography sx={{ fontSize:'18px', display: {
+            xs: 'none',
+            sm: 'block',
+          }}}>تسجيل الخروج</Typography>
+        </Button>
+
     </Box>
   );
 };

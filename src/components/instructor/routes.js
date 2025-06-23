@@ -7,7 +7,6 @@ import quiz from './assets/quiz.svg';
 import lectures from './assets/lectures.svg';
 import progress from './assets/progress.svg';
 import settings from './assets/settings.svg';
-import logout from './assets/logout.svg';
 
 export const routes = [
   {
@@ -54,11 +53,5 @@ export const routes = [
     title: 'الإعدادات',
     path: 'settings',
     icon: settings,
-  },
-  {
-    title: 'تسجيل الخروج',
-    path: 'logout',
-    icon: logout,
-    logout: true,
   },
 ];

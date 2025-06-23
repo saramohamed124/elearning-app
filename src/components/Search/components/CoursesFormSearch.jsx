@@ -32,13 +32,13 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
         { value: 3, label: 'خبير' },
         { value: 4, label: 'محترف' }
       ];
-      if(!categories || categories.length === 0) {
-        return (
-          <Box sx={{ padding: '10px', color: 'var(--main-color-error)' }}>
-            حدث خطأ أثناء تحميل الفئات، الرجاء المحاولة لاحقًا.
-          </Box>
-        );
-      }      
+      // if(!categories || categories.length === 0) {
+      //   return (
+      //     <Box sx={{ padding: '10px', color: 'var(--main-color-error)' }}>
+      //       حدث خطأ أثناء تحميل الفئات، الرجاء المحاولة لاحقًا.
+      //     </Box>
+      //   );
+      // }      
       if (categories?.length < 0 || isLoading) {
         return (
           <Box sx={{ padding: '10px' }}>

@@ -7,17 +7,17 @@ const CATEGORIES_QUERY_KEY = ['categories'];
 
 const useCategories = () => {
   return useQuery({
-    queryKey: ['categories'],
+    queryKey: CATEGORIES_QUERY_KEY,
     queryFn: async () => {
       try {
         const res = await api.get(GET_CATEGORIES);        
-        return res?.data.data;
+        return res?.data.data || [] || res?.data;
       } catch (error) {
-        // console.error('Error fetching categories:', error);
-        throw error; // ✅ throw instead of return
+        throw error;
       }
     },
-    staleTime:0,
+    staleTime: 0,
   });
 };
+
 export default useCategories;

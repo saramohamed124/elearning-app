@@ -5,15 +5,22 @@ import { Box, CircularProgress } from '@mui/material';
 import { FlexboxWrap } from '../../../../styles/globalStyles';
 
 const CategoryCards = () => {
-    const {data, isLoading, isError} = useCategories();
+    const {data, isLoading, isError} = useCategories() || [];
 
     if(isLoading) return <CircularProgress/>
-    if(!data ||data.length === 0 || isError || data === undefined){
+    if(!data || (Array.isArray(data) && data.length === 0) || isError || data === undefined){
         return (
             <p style={{ padding: '40px 25px', fontSize: '20px', color: '#555', textAlign: 'center' }}>
               {'لا توجد فئات . يرجى إضافة فئة'}
             </p>
           );      
+    }
+    if(!Array.isArray(data)) {
+        return (
+            <p style={{ padding: '40px 25px', fontSize: '20px', color: 'red', textAlign: 'center' }}>
+              {'فشل تحميل الفئات'}
+            </p>
+          );
     }
   return (
     <Box sx={{...FlexboxWrap, gap:'40px'}}>

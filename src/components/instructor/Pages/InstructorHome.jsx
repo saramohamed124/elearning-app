@@ -2,7 +2,7 @@ import React from 'react'
 import Articles from '../DashboardHome/Articles'
 import {LineChartArticles} from '../DashboardHome/components/LineChartArticles'
 import Headings from '../../../utils/Headings/Headings'
-import InstructorCourses from '../DashboardHome/components/InstructorCourses'
+import CoursesInstructor from '../DashboardHome/components/CoursesInstructor'
 import { Box } from '@mui/material'
 import { FlexboxBetween } from '../../../styles/globalStyles'
 import { Link } from 'react-router-dom'
@@ -32,7 +32,7 @@ const InstructorHome = () => {
             borderRadius:'5px',
         }}>إضافة كورس</Link>
       </Box>
-      <InstructorCourses/>
+      <CoursesInstructor/>
         <ShowMore linkpg={'/instructor-dashboard/courses'}/>
     </div>
   )

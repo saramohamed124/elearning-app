@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/api";
 import { GET_CATEGORIES } from "../api/endpoints";
 
-const CATEGORIES_QUERY_KEY = ['categories'];
+const CATEGORIES_QUERY_KEY = ['categoriess'];
 
 const useCategoryId = (categoryId) => {
   return useQuery({
@@ -13,7 +13,7 @@ const useCategoryId = (categoryId) => {
         return res.data.data;
       } catch (error) {
         // console.error('Error fetching categories:', error);
-        throw error; // ✅ throw instead of return
+        throw error;
       }
     },
     staleTime:0,

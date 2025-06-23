@@ -8,7 +8,7 @@ import { SuccessMsgToast } from "../components/Auth/utils/toasts";
  * Stores the tokens securely in cookies.
  */
 const setToken = (token, refreshToken, tokenExpiration, id, email, role) => { // role and id and email are optional
-    const expiresAt = new Date(tokenExpiration).getTime();
+    const expiresAt = new Date(tokenExpiration).getTime(); 
     Cookies.set("accessToken", token);
     Cookies.set("refreshToken", refreshToken);
     Cookies.set("expiresIn", expiresAt);
@@ -50,7 +50,7 @@ const refreshToken = async () => {
         if (!refreshToken || !accessToken) {
             throw new Error("Token not found. Please log in again.");
         }
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}${REFRESH_TOKEN}`, {  accessToken, refreshToken });
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}${REFRESH_TOKEN}`, { accessToken, refreshToken });
         
         const { token: newAccessToken, refreshToken: newRefreshToken, tokenExpiration } = res.data?.data;
 
@@ -70,7 +70,7 @@ const refreshToken = async () => {
  */
 const logout = async (email) => {
     try {
-        await api.post(REVOKE_TOKEN, { username: email });
+        await api.post(REVOKE_TOKEN, { username: email }); // rovoke token means => token is no longer valid
         SuccessMsgToast('انتهت جلستك. الرجاء تسجيل الدخول مرة أخرى.');
         window.location.href = "/login"; // Redirect to login page after logout
     } catch (error) {

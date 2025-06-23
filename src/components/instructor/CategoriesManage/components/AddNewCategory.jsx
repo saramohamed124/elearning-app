@@ -1,15 +1,14 @@
-import { Box, Button, FormControl, FormLabel, OutlinedInput, styled, Typography } from '@mui/material'
+import { Box, Button, FormControl, FormLabel, OutlinedInput, styled } from '@mui/material'
 import React, { useCallback, useState } from 'react'
 import { Flexbox } from '../../../../styles/globalStyles'
 import { api } from '../../../../api/api';
 import { GET_CATEGORIES } from '../../../../api/endpoints';
 import { ErrorMsgToast, SuccessMsgToast } from '../../../Auth/utils/toasts';
 import { NAME_REGEX } from '../../../Auth/constants/regex';
-import { useTheme } from '@emotion/react';
 import ErrorMsg from '../../../../utils/Error/ErrorMsg';
+import { ToastWrapper } from '../../../Auth/utils/ToasterWrapper';
 
 const AddNewCategory = () => {
-  const theme = useTheme()
     const [categoryName, setCategoryName] = useState(null);
     const [err, setErr] = useState(null);
 
@@ -24,7 +23,7 @@ const AddNewCategory = () => {
         const handleAddNewCategory = useCallback( async(e) => {
             e.preventDefault();
             setErr('')
-            if(!NAME_REGEX.test(categoryName)) return setErr('يجب ألا يقل اسم الفئة عن 3 أحرف')
+            if(!NAME_REGEX.test(categoryName)) return setErr('يجب ألا يقل اسم الفئة عن 4 أحرف')
             try{
                 await api.post(GET_CATEGORIES,{ Name: categoryName });
                 SuccessMsgToast('تم إضافة الفئة بنجاح.')
@@ -49,6 +48,7 @@ const AddNewCategory = () => {
     </FormControl>
       <ButtonAddNewCategory type='submit'>إضافة فئة</ButtonAddNewCategory>
         <ErrorMsg err={err}/>
+        <ToastWrapper />
     </Box>
   )
 }
