@@ -18,7 +18,7 @@ const CourseCard = ({course}) => {
         left: '50%',
         width: '94%',
         height: 'fit-content',
-        padding: '10px 15px',
+        padding: '10px 9px',
         backgroundColor: 'white',
         transform: 'translateX(-50%)',
       }));

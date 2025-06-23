@@ -23,7 +23,7 @@ const AddNewCategory = () => {
         const handleAddNewCategory = useCallback( async(e) => {
             e.preventDefault();
             setErr('')
-            if(!NAME_REGEX.test(categoryName)) return setErr('يجب ألا يقل اسم الفئة عن 4 أحرف')
+            if(!NAME_REGEX.test(categoryName)) return setErr('يجب ألا يقل اسم الفئة عن 6 أحرف')
             try{
                 await api.post(GET_CATEGORIES,{ Name: categoryName });
                 SuccessMsgToast('تم إضافة الفئة بنجاح.')
