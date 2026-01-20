@@ -1,5 +1,5 @@
 import React from 'react'
-import { OverflowHidden, PositionRelative, TextLeft, WidthFit } from '../../styles/globalStyles';
+import {  PositionRelative, TextLeft, WidthFit } from '../../styles/globalStyles';
 import { CategoryCustom } from '../../styles/Courses';
 import { Box, Rating, styled, Typography } from '@mui/material';
 
@@ -66,7 +66,6 @@ const CourseCard = ({course}) => {
         </Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box>
-            <Typography sx={{ fontSize: '1rem' }}>Rating</Typography>
             <Rating
               value={Number(ratingCourse) || 0}
               readOnly

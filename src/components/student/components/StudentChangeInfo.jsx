@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import TextStudentInput from "../common/TextStudentInput";
 import StudentAvatar from "./StudentAvatar";
-import { Box, CircularProgress, Typography, IconButton, Button, Grid2, Grid } from "@mui/material";
+import { Box, CircularProgress, Typography, IconButton, Button,  Grid } from "@mui/material";
 import Cookies from "js-cookie";
 import { useQuery } from "@tanstack/react-query";
 import { studentService } from "../../../services/studentService";

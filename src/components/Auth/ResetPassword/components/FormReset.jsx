@@ -1,14 +1,12 @@
 import React, { useCallback, useState } from 'react'
 import { FormCustomStyle, FormRegisterStyle } from '../../../../styles/globalStyles'
-import { Box, FormControl, FormGroup, OutlinedInput, Typography } from '@mui/material'
-import styled from '@emotion/styled';
+import { Box, FormControl, Typography } from '@mui/material'
 import ButtonAuth from '../../common/Button';
 import { api } from '../../../../api/api';
 import { FORGET_PWD } from '../../../../api/endpoints';
 import TextInput from '../../common/TextInput';
 import { MAIL_REGEX } from '../../constants/regex';
 import ErrorInputs from '../../common/ErrorInputs';
-import toast from 'react-hot-toast';
 import { ToastWrapper } from '../../utils/ToasterWrapper';
 import { SuccessMsgToast } from '../../utils/toasts';
 

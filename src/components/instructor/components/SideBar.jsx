@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { routes } from '../routes';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { getToken, logout } from '../../../services/authServices';
 
 // icons
