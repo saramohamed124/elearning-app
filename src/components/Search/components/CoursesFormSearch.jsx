@@ -20,9 +20,9 @@ const FilterMenu = ({open, handleClose, setSubmitData}) => {
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('');
     // const [error, setError] = useState('')
-    const location = window.location.search;
-    const params = new URLSearchParams(location);
-    const searchTerm = params.get('searchTerm');
+    // const location = window.location.search;
+    // const params = new URLSearchParams(location);
+    // const searchTerm = params.get('searchTerm');
 
     // handle filter Level
     const levels = [

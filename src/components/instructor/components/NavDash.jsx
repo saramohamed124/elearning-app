@@ -47,7 +47,7 @@ const NavDash = () => {
   const {
     data: InstructorData,
     isLoading: instructorLoading,
-    isError: instructorError,
+    // isError: instructorError,
   } = useQuery({
     queryKey: ['data', id],
     queryFn: () => instructorService(id),
