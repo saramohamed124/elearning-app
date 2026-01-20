@@ -39,14 +39,20 @@ const SideBar = () => {
           }}}>{title}</Typography>
         </Link>
       ))}
-      <hr style={{
-        display: 'block',
-        width: '100%',
-        height:'3px',
-        background: 'black',
-        borderRadius: '50px',
-      }}/>
-        <Button
+      <Box
+        component="hr"
+        sx={{
+          display: 'block',
+          width: '100%',
+          height: '3px',
+          backgroundColor: 'black',
+          borderRadius: '50px',
+          border: 'none',
+          margin: 0,
+        }}
+      />
+
+      <Box
           onClick={() => {
             logout(email)
           }}
@@ -57,6 +63,7 @@ const SideBar = () => {
             gap: '10px',
             color: 'black',
             textDecoration: 'none',
+            cursor: 'pointer',
           }}
         >
           <img src={logout_icon} alt={'logout'} width={24} height={24} />
@@ -64,7 +71,7 @@ const SideBar = () => {
             xs: 'none',
             sm: 'block',
           }}}>تسجيل الخروج</Typography>
-        </Button>
+        </Box>
 
     </Box>
   );

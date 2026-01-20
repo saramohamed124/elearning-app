@@ -6,11 +6,9 @@ import { FlexCards } from '../../../../../styles/globalStyles'; // Your Flex sty
 const Courses = () => {
 
   return (
-    <div>
       <Box sx={{ ...FlexCards }}>
         <Course />
       </Box>
-    </div>
   );
 };
 
